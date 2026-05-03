@@ -1,0 +1,657 @@
+// ============================================================
+// Arbaeen 2026 — Bootstrap 5 Theme
+// Brand: Ziarat Planner × Bhojani Brothers Travel & Tour
+// ============================================================
+
+// 1. Bootstrap variable overrides
+$primary:   #5C0F1E;
+$secondary: #C9A961;
+
+$body-bg:    #FBF6EC;
+$body-color: #2A1810;
+$link-color: #5C0F1E;
+
+$font-family-sans-serif: 'Poppins', system-ui, -apple-system, sans-serif;
+$headings-font-family:   'Poppins', sans-serif;
+$headings-font-weight:   600;
+$headings-color:         #3D0A14;
+$headings-letter-spacing: -0.01em;
+$display-font-family:    'Poppins', sans-serif;
+$display-font-weight:    300;
+$lead-font-weight:       400;
+
+$border-radius:    0.5rem;
+$border-radius-lg: 0.75rem;
+$border-radius-sm: 0.35rem;
+
+$btn-font-weight:     600;
+$btn-font-size:       0.875rem;
+$btn-border-radius:   0.5rem;
+$btn-padding-x:       1.5rem;
+$btn-padding-y:       0.6rem;
+$btn-border-radius-lg: 0.6rem;
+$btn-padding-x-lg:    2rem;
+$btn-padding-y-lg:    0.75rem;
+
+$card-border-color:   rgba(0, 0, 0, 0.07);
+$card-cap-bg:         rgba(92, 15, 30, 0.04);
+$card-bg:             #fff;
+$card-border-radius:  0.75rem;
+$card-box-shadow:     0 4px 20px rgba(0, 0, 0, 0.07);
+
+$navbar-dark-color:        rgba(255, 255, 255, 0.8);
+$navbar-dark-hover-color:  #C9A961;
+$navbar-dark-active-color: #C9A961;
+$navbar-dark-toggler-border-color: rgba(255, 255, 255, 0.25);
+
+$table-striped-bg:   rgba(201, 169, 97, 0.05);
+$table-hover-bg:     rgba(92, 15, 30, 0.03);
+$table-border-color: rgba(0, 0, 0, 0.07);
+
+$badge-font-weight:  600;
+$badge-padding-x:    0.7em;
+$badge-border-radius: 0.4rem;
+
+$input-border-radius:      0.5rem;
+$input-focus-border-color: #C9A961;
+$input-focus-box-shadow:   0 0 0 3px rgba(201, 169, 97, 0.2);
+$input-border-color:       rgba(0, 0, 0, 0.15);
+
+$pagination-active-bg:           #5C0F1E;
+$pagination-active-border-color: #5C0F1E;
+$pagination-border-radius:       0.5rem;
+
+$accordion-button-focus-box-shadow: 0 0 0 3px rgba(201, 169, 97, 0.2);
+$accordion-border-radius: 0.5rem;
+
+// 2. Import Bootstrap
+@import "bootstrap/scss/bootstrap";
+
+// 3. Brand CSS custom properties
+:root {
+    --zp-maroon:      #5C0F1E;
+    --zp-maroon-dark: #3D0A14;
+    --zp-gold:        #C9A961;
+    --zp-gold-soft:   #E8D9A8;
+    --zp-orange:      #E8651F;
+    --zp-cream:       #FBF6EC;
+    --zp-cream-warm:  #F4EAD5;
+    --zp-ink:         #2A1810;
+    --zp-ink-soft:    #5A3A28;
+    --zp-shadow-sm:   0 2px 8px rgba(0, 0, 0, 0.07);
+    --zp-shadow:      0 4px 20px rgba(0, 0, 0, 0.09);
+    --zp-shadow-lg:   0 8px 40px rgba(0, 0, 0, 0.12);
+}
+
+// 4. Utilities
+.bg-maroon        { background-color: var(--zp-maroon) !important; }
+.bg-maroon-dark   { background-color: var(--zp-maroon-dark) !important; }
+.bg-cream         { background-color: var(--zp-cream) !important; }
+.bg-cream-warm    { background-color: var(--zp-cream-warm) !important; }
+.bg-gold          { background-color: var(--zp-gold) !important; }
+.bg-gold-soft     { background-color: var(--zp-gold-soft) !important; }
+
+.text-gold        { color: var(--zp-gold) !important; }
+.text-gold-soft   { color: var(--zp-gold-soft) !important; }
+.text-maroon      { color: var(--zp-maroon) !important; }
+.text-orange      { color: var(--zp-orange) !important; }
+.text-ink         { color: var(--zp-ink) !important; }
+.text-ink-soft    { color: var(--zp-ink-soft) !important; }
+
+// Poppins weight helpers
+.fw-300 { font-weight: 300 !important; }
+.fw-400 { font-weight: 400 !important; }
+.fw-500 { font-weight: 500 !important; }
+.fw-600 { font-weight: 600 !important; }
+.fw-700 { font-weight: 700 !important; }
+
+// .font-serif now maps to Poppins 600 (used in blade files as "display/brand" style)
+.font-serif { font-family: 'Poppins', sans-serif !important; font-weight: 600 !important; }
+
+// Letter-spacing helpers
+.ls-tight { letter-spacing: -0.02em !important; }
+.ls-wide  { letter-spacing: 0.08em !important; }
+.ls-wider { letter-spacing: 0.15em !important; }
+
+// 5. Button variants
+.btn-orange {
+    --bs-btn-bg:                  #E8651F;
+    --bs-btn-border-color:        #E8651F;
+    --bs-btn-color:               #fff;
+    --bs-btn-hover-bg:            #d05819;
+    --bs-btn-hover-border-color:  #d05819;
+    --bs-btn-hover-color:         #fff;
+    --bs-btn-active-bg:           #b84d15;
+    --bs-btn-active-border-color: #b84d15;
+    --bs-btn-active-color:        #fff;
+    --bs-btn-disabled-bg:         #E8651F;
+    --bs-btn-disabled-border-color: #E8651F;
+    --bs-btn-disabled-color:      #fff;
+    box-shadow: 0 2px 8px rgba(232, 101, 31, 0.3);
+    transition: box-shadow 0.2s, background-color 0.2s, transform 0.15s;
+
+    &:hover { box-shadow: 0 4px 16px rgba(232, 101, 31, 0.4); transform: translateY(-1px); }
+    &:active { transform: translateY(0); }
+}
+.btn-gold {
+    --bs-btn-bg:                  #C9A961;
+    --bs-btn-border-color:        #C9A961;
+    --bs-btn-color:               #3D0A14;
+    --bs-btn-hover-bg:            #b5953a;
+    --bs-btn-hover-border-color:  #b5953a;
+    --bs-btn-hover-color:         #3D0A14;
+    --bs-btn-active-bg:           #a08430;
+    --bs-btn-active-border-color: #a08430;
+    --bs-btn-active-color:        #3D0A14;
+}
+.btn-outline-gold {
+    --bs-btn-color:               #C9A961;
+    --bs-btn-border-color:        #C9A961;
+    --bs-btn-hover-bg:            #C9A961;
+    --bs-btn-hover-border-color:  #C9A961;
+    --bs-btn-hover-color:         #3D0A14;
+}
+.btn-maroon {
+    --bs-btn-bg:                  #5C0F1E;
+    --bs-btn-border-color:        #5C0F1E;
+    --bs-btn-color:               #fff;
+    --bs-btn-hover-bg:            #4a0c18;
+    --bs-btn-hover-border-color:  #4a0c18;
+    --bs-btn-hover-color:         #fff;
+}
+
+// 6. Navbar
+.navbar-arbaeen {
+    background-color: var(--zp-maroon-dark);
+    padding-top:    0.75rem;
+    padding-bottom: 0.75rem;
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.3);
+
+    .navbar-brand {
+        color: var(--zp-gold) !important;
+        font-family: 'Poppins', sans-serif;
+        font-size: 1.15rem;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+        line-height: 1.2;
+
+        &:hover { color: var(--zp-gold-soft) !important; }
+    }
+
+    .navbar-brand-sub {
+        font-size: 0.65rem;
+        color: rgba(255, 255, 255, 0.45);
+        font-weight: 400;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+    }
+
+    .nav-link {
+        font-size:   0.825rem;
+        font-weight: 300;
+        letter-spacing: 0.01em;
+        padding:     0.45rem 0.8rem;
+        transition:  color 0.15s;
+    }
+
+    .nav-link.active { color: var(--zp-gold) !important; }
+
+    .navbar-toggler {
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        padding: 0.35rem 0.55rem;
+        border-radius: 0.4rem;
+        &:focus { box-shadow: 0 0 0 3px rgba(201, 169, 97, 0.3); }
+    }
+}
+
+// 7. Announcement strip
+.announcement-strip {
+    background-color: var(--zp-maroon);
+    color: var(--zp-gold-soft);
+    padding: 0.5rem 0;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-align: center;
+
+    a {
+        color: var(--zp-gold);
+        text-decoration: none;
+        font-weight: 600;
+        &:hover { text-decoration: underline; }
+    }
+
+    .strip-sep { opacity: 0.4; margin: 0 0.5rem; }
+}
+
+// 8. WhatsApp float button
+.whatsapp-float {
+    position:         fixed;
+    bottom:           28px;
+    right:            28px;
+    z-index:          9999;
+    width:            56px;
+    height:           56px;
+    background-color: #25D366;
+    border-radius:    50%;
+    display:          flex;
+    align-items:      center;
+    justify-content:  center;
+    box-shadow:       0 4px 16px rgba(0, 0, 0, 0.2), 0 2px 8px rgba(37, 211, 102, 0.35);
+    transition:       transform 0.2s ease, box-shadow 0.2s ease;
+    text-decoration:  none;
+
+    svg { width: 28px; height: 28px; }
+
+    &:hover {
+        transform:  scale(1.1);
+        box-shadow: 0 6px 24px rgba(0, 0, 0, 0.25), 0 4px 12px rgba(37, 211, 102, 0.4);
+    }
+}
+
+// 9. Section helpers
+.section-py    { padding-top: 5rem; padding-bottom: 5rem; }
+.section-py-sm { padding-top: 2.5rem; padding-bottom: 2.5rem; }
+.section-py-lg { padding-top: 7rem; padding-bottom: 7rem; }
+
+.section-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--zp-orange);
+    margin-bottom: 1rem;
+
+    &::before {
+        content: '';
+        display: inline-block;
+        width: 24px;
+        height: 2px;
+        background: var(--zp-orange);
+    }
+}
+
+.gold-sep {
+    display:    block;
+    width:      48px;
+    height:     3px;
+    background: var(--zp-gold);
+    margin:     0.85rem auto;
+    border:     none;
+    opacity:    1;
+    border-radius: 2px;
+}
+.gold-sep-left { margin: 0.85rem 0; }
+
+// 10. Hero section
+.hero-section {
+    background-color: var(--zp-maroon-dark);
+    background-size:  cover;
+    background-position: center;
+    position: relative;
+    color: #fff;
+    overflow: hidden;
+
+    &::before {
+        content:    '';
+        position:   absolute;
+        inset:      0;
+        background: linear-gradient(
+            135deg,
+            rgba(61, 10, 20, 0.96) 0%,
+            rgba(92, 15, 30, 0.82) 50%,
+            rgba(61, 10, 20, 0.9)  100%
+        );
+    }
+
+    &::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-image: repeating-linear-gradient(
+            45deg,
+            transparent,
+            transparent 40px,
+            rgba(201, 169, 97, 0.025) 40px,
+            rgba(201, 169, 97, 0.025) 41px
+        );
+        pointer-events: none;
+    }
+
+    > * { position: relative; z-index: 1; }
+}
+
+.hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--zp-gold);
+    margin-bottom: 1.5rem;
+
+    &::before, &::after {
+        content: '';
+        display: inline-block;
+        width: 20px;
+        height: 1px;
+        background: var(--zp-gold);
+        opacity: 0.6;
+    }
+}
+
+// 11. Package card
+.package-card {
+    border:        1px solid rgba(0, 0, 0, 0.07);
+    border-radius: 0.875rem;
+    background:    #fff;
+    overflow:      hidden;
+    box-shadow:    var(--zp-shadow-sm);
+    transition:    border-color 0.2s, box-shadow 0.2s, transform 0.25s;
+
+    &:hover {
+        border-color: var(--zp-gold);
+        box-shadow:   0 12px 40px rgba(92, 15, 30, 0.14);
+        transform:    translateY(-4px);
+    }
+
+    .package-card-header {
+        background: linear-gradient(135deg, var(--zp-maroon-dark) 0%, var(--zp-maroon) 100%);
+        color:      #fff;
+        padding:    1.5rem 1.75rem;
+    }
+
+    .package-badge {
+        display:        inline-flex;
+        align-items:    center;
+        background:     rgba(201, 169, 97, 0.2);
+        color:          var(--zp-gold);
+        font-size:      0.65rem;
+        font-weight:    700;
+        letter-spacing: 0.1em;
+        padding:        0.3em 0.8em;
+        border-radius:  0.3rem;
+        text-transform: uppercase;
+        border:         1px solid rgba(201, 169, 97, 0.3);
+        margin-bottom:  0.75rem;
+    }
+
+    .package-price {
+        font-size:   1.75rem;
+        font-weight: 700;
+        color:       var(--zp-maroon);
+        letter-spacing: -0.02em;
+        line-height: 1;
+    }
+}
+
+// 12. Seat counter strip
+.counter-strip {
+    background:    var(--zp-cream-warm);
+    border-top:    2px solid var(--zp-gold);
+    border-bottom: 1px solid rgba(201, 169, 97, 0.3);
+    padding:       0.85rem 0;
+    font-size:     0.85rem;
+    font-weight:   600;
+    color:         var(--zp-ink);
+
+    .counter-label {
+        font-size:   0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--zp-maroon);
+        margin-right: 0.4rem;
+    }
+}
+
+// 13. Highlights feature strip
+.highlight-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 1.25rem 0.75rem;
+
+    .highlight-icon {
+        width: 44px;
+        height: 44px;
+        background: rgba(201, 169, 97, 0.18);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 0.75rem;
+        font-size: 1.1rem;
+        color: var(--zp-gold);
+    }
+
+    .highlight-title {
+        font-size: 0.8rem;
+        font-weight: 600;
+        margin-bottom: 0.2rem;
+    }
+
+    .highlight-desc {
+        font-size: 0.7rem;
+        opacity: 0.6;
+    }
+}
+
+// 14. City card
+.city-card {
+    background: #fff;
+    border: 1px solid rgba(201, 169, 97, 0.25);
+    border-radius: 0.875rem;
+    padding: 1.75rem;
+    text-align: center;
+    box-shadow: var(--zp-shadow-sm);
+    transition: box-shadow 0.2s, transform 0.2s;
+
+    &:hover {
+        box-shadow: var(--zp-shadow);
+        transform: translateY(-2px);
+    }
+
+    .city-nights {
+        display: inline-block;
+        background: var(--zp-maroon);
+        color: var(--zp-gold);
+        font-size: 0.65rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: 0.3em 0.9em;
+        border-radius: 0.3rem;
+        margin-bottom: 1rem;
+    }
+}
+
+// 15. FAQ accordion
+.faq-accordion {
+    .accordion-item {
+        border: none;
+        border-bottom: 1px solid rgba(201, 169, 97, 0.2);
+        background: transparent;
+
+        &:last-child { border-bottom: none; }
+    }
+
+    .accordion-button {
+        background:  transparent;
+        color:       var(--zp-ink);
+        font-weight: 500;
+        font-size:   0.95rem;
+        padding:     1.1rem 0;
+        box-shadow:  none !important;
+
+        &:not(.collapsed) {
+            color:      var(--zp-maroon);
+            background: transparent;
+        }
+
+        &::after {
+            filter: none;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%235C0F1E'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+        }
+    }
+
+    .accordion-body {
+        color:    var(--zp-ink-soft);
+        font-size: 0.9rem;
+        padding:  0 0 1.1rem 0;
+        line-height: 1.7;
+    }
+}
+
+// 16. Footer
+.site-footer {
+    background-color: var(--zp-maroon-dark);
+    color:            rgba(255, 255, 255, 0.7);
+
+    .footer-brand {
+        font-size:   1rem;
+        font-weight: 700;
+        color:       var(--zp-gold);
+        letter-spacing: -0.01em;
+    }
+
+    .footer-heading {
+        font-size:      0.65rem;
+        font-weight:    700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color:          rgba(255, 255, 255, 0.4);
+        margin-bottom:  1rem;
+    }
+
+    a {
+        color:           rgba(255, 255, 255, 0.6);
+        text-decoration: none;
+        transition:      color 0.15s;
+        font-size:       0.875rem;
+
+        &:hover { color: var(--zp-gold); }
+    }
+
+    .footer-bottom {
+        border-top:  1px solid rgba(255, 255, 255, 0.08);
+        padding-top: 1.25rem;
+        margin-top:  2rem;
+        font-size:   0.75rem;
+        color:       rgba(255, 255, 255, 0.35);
+    }
+}
+
+// 17. Registration step progress
+.step-progress {
+    display:     flex;
+    align-items: center;
+    gap:         0;
+    padding:     1.5rem 0;
+
+    .step-node {
+        width:           32px;
+        height:          32px;
+        border-radius:   50%;
+        border:          2px solid rgba(92, 15, 30, 0.2);
+        background:      #fff;
+        color:           rgba(92, 15, 30, 0.35);
+        font-size:       0.75rem;
+        font-weight:     700;
+        display:         flex;
+        align-items:     center;
+        justify-content: center;
+        flex-shrink:     0;
+        transition:      all 0.2s;
+
+        &.active {
+            background:   var(--zp-maroon);
+            border-color: var(--zp-maroon);
+            color:        #fff;
+            box-shadow:   0 0 0 4px rgba(92, 15, 30, 0.15);
+        }
+
+        &.done {
+            background:   var(--zp-gold);
+            border-color: var(--zp-gold);
+            color:        var(--zp-ink);
+        }
+    }
+
+    .step-line {
+        flex:       1;
+        height:     2px;
+        background: rgba(92, 15, 30, 0.12);
+        transition: background 0.3s;
+
+        &.done { background: var(--zp-gold); }
+    }
+}
+
+// 18. Status badges
+.badge-status-confirmed { @extend .badge; background-color: #1a7a4a !important; }
+.badge-status-pending   { @extend .badge; background-color: var(--zp-orange) !important; }
+.badge-status-docs      { @extend .badge; background-color: #0891b2 !important; }
+.badge-status-renewal   { @extend .badge; background-color: #b8860b !important; color: #fff !important; }
+.badge-status-cancelled { @extend .badge; background-color: #9b1c1c !important; }
+
+// 19. Admin sidebar
+.admin-sidebar {
+    background-color: var(--zp-maroon-dark);
+    min-height:       100vh;
+    padding-top:      1.25rem;
+
+    .nav-link {
+        color:         rgba(255, 255, 255, 0.7);
+        font-size:     0.825rem;
+        font-weight:   500;
+        padding:       0.6rem 1.25rem;
+        border-radius: 0.5rem;
+        margin:        0.1rem 0.75rem;
+        transition:    all 0.15s;
+
+        &:hover, &.active {
+            background: rgba(201, 169, 97, 0.12);
+            color:      var(--zp-gold);
+        }
+    }
+}
+
+// 20. Info cards (used on detail pages)
+.info-card {
+    background:    #fff;
+    border:        1px solid rgba(0, 0, 0, 0.07);
+    border-radius: 0.875rem;
+    padding:       1.75rem;
+    box-shadow:    var(--zp-shadow-sm);
+
+    .info-card-icon {
+        width:         44px;
+        height:        44px;
+        background:    rgba(92, 15, 30, 0.06);
+        border-radius: 0.6rem;
+        display:       flex;
+        align-items:   center;
+        justify-content: center;
+        font-size:     1.2rem;
+        margin-bottom: 1rem;
+        color:         var(--zp-maroon);
+    }
+}
+
+// 21. Responsive
+@include media-breakpoint-down(md) {
+    .section-py    { padding-top: 3rem;   padding-bottom: 3rem; }
+    .section-py-lg { padding-top: 4rem;   padding-bottom: 4rem; }
+    .section-py-sm { padding-top: 1.75rem; padding-bottom: 1.75rem; }
+}
+
+@include media-breakpoint-down(sm) {
+    .hero-section { text-align: center; }
+}
