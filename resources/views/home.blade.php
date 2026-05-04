@@ -12,7 +12,7 @@
         <div class="row justify-content-center text-center">
             <div class="col-lg-8 col-xl-7">
 
-                <div class="hero-eyebrow">Arbaeen 2026 · Pakistan to Iraq</div>
+                <div class="hero-eyebrow">Arbaeen Packages 2026 · Pakistan to Iraq</div>
 
                 <h1 class="display-2 fw-300 text-white mb-4 ls-tight" style="line-height: 1.05">
                     Arbaeen Ziyarat<br>
@@ -234,14 +234,14 @@
 </section>
 
 {{-- Social proof feed --}}
-<section class="section-py-sm bg-cream" id="social-feed" style="display:none">
+<!-- <section class="section-py-sm bg-cream" id="social-feed" style="display:none">
     <div class="container">
         <p class="text-center mb-3" style="font-size: 0.7rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.5">
             Recent Registrations
         </p>
         <div id="feed-items" class="d-flex gap-2 flex-wrap justify-content-center"></div>
     </div>
-</section>
+</section> -->
 
 {{-- FAQ --}}
 <section class="section-py bg-cream-warm">

@@ -108,7 +108,7 @@
                                     @if($persons->count() > 1) × {{ $persons->count() }}@endif
                                 </td>
                                 <td class="text-muted border-0 pb-2" style="width:30%">
-                                    @if($persons->count() > 1)${{ number_format($unitPrice) }} each@endif
+                                    @if($persons->count() > 1)${{ number_format($unitPrice) }} each @endif
                                 </td>
                                 <td class="fw-600 border-0 pb-2 text-end">${{ number_format($persons->sum('price_usd')) }}</td>
                             </tr>
