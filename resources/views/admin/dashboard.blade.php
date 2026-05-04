@@ -16,7 +16,7 @@
     @foreach([
         ['Total Bookings', $stats['total'], 'var(--zp-ink)'],
         ['Total Travelers', $stats['total_travelers'], 'var(--zp-maroon)'],
-        ['Confirmed', $stats['confirmed'], '#155724'],
+        ['Confirmed Bookings', $stats['confirmed'], '#155724'],
         ['Pending Deposit', $stats['pending'], 'var(--zp-orange)'],
         ['Cancelled', $stats['cancelled'], '#721c24'],
         ['AR01', $stats['ar01_total'], 'var(--zp-maroon)'],
