@@ -1,9 +1,8 @@
 @extends('layouts.app')
+
 @section('title', 'AR01 — Arbaeen in Karbala | Arbaeen 2026')
+@section('meta_description', 'AR01 group departs 23 July 2026. 15-day pilgrimage from Pakistan to Iraq — Najaf, Karbala, Kadhimiya. Arbaeen Walk included. Full package from $1,440. Bhojani Brothers × Ziarat Planner.')
+
 @section('content')
-<div class="container section-py text-center">
-    <h1 class="font-serif text-maroon">AR01 — Arbaeen in Karbala</h1>
-    <p class="text-muted">Full package page — Module 3</p>
-    <a href="{{ route('register') }}?group=AR01" class="btn btn-orange mt-3">Begin Registration</a>
-</div>
+@include('partials.package-detail')
 @endsection

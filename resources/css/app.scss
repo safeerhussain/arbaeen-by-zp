@@ -539,12 +539,43 @@ $accordion-border-radius: 0.5rem;
         &:hover { color: var(--zp-gold); }
     }
 
+    .footer-nav-link {
+        font-size:      0.7rem;
+        font-weight:    600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color:          rgba(255, 255, 255, 0.5);
+        margin:         0 0.75rem;
+        text-decoration: none;
+        transition:     color 0.15s;
+
+        &:hover { color: var(--zp-gold); }
+    }
+
+    .footer-social-icon {
+        display:         inline-flex;
+        align-items:     center;
+        justify-content: center;
+        width:           36px;
+        height:          36px;
+        border-radius:   50%;
+        border:          1px solid rgba(255, 255, 255, 0.12);
+        color:           rgba(255, 255, 255, 0.45);
+        transition:      color 0.15s, border-color 0.15s;
+
+        &:hover {
+            color:        var(--zp-gold);
+            border-color: rgba(201, 169, 97, 0.4);
+        }
+    }
+
     .footer-bottom {
-        border-top:  1px solid rgba(255, 255, 255, 0.08);
-        padding-top: 1.25rem;
-        margin-top:  2rem;
-        font-size:   0.75rem;
-        color:       rgba(255, 255, 255, 0.35);
+        border-top:     1px solid rgba(255, 255, 255, 0.08);
+        padding-top:    1.25rem;
+        padding-bottom: 1.5rem;
+        margin-top:     2rem;
+        font-size:      0.75rem;
+        color:          rgba(255, 255, 255, 0.35);
     }
 }
 

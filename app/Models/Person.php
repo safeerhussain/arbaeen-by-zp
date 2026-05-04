@@ -13,6 +13,8 @@ class Person extends Model
     /** @use HasFactory<PersonFactory> */
     use HasFactory;
 
+    protected $table = 'persons';
+
     protected $fillable = [
         'booking_id',
         'person_id',
@@ -24,6 +26,7 @@ class Person extends Model
         'passenger_type',
         'relationship',
         'passport_expiry',
+        'passport_renewal_required',
         'passport_status',
         'mobile',
         'alternate_mobile',
@@ -37,6 +40,7 @@ class Person extends Model
     protected $casts = [
         'date_of_birth' => 'date',
         'passport_expiry' => 'date',
+        'passport_renewal_required' => 'boolean',
         'wheelchair_required' => 'boolean',
     ];
 

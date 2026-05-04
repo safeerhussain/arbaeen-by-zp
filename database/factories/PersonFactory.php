@@ -20,7 +20,7 @@ class PersonFactory extends Factory
 
         return [
             'booking_id' => Booking::factory(),
-            'person_id' => 'AR01-001-01',
+            'person_id' => fake()->unique()->regexify('AR0[12]-[0-9]{3}-0[1-9]'),
             'position' => 1,
             'full_name' => fake()->name(),
             'fathers_name' => fake()->name('male'),
@@ -29,7 +29,7 @@ class PersonFactory extends Factory
             'passenger_type' => 'adult',
             'relationship' => null,
             'passport_expiry' => fake()->dateTimeBetween('+6 months', '+5 years')->format('Y-m-d'),
-            'passport_status' => fake()->randomElement(['pending', 'uploaded', 'approved']),
+            'passport_status' => fake()->randomElement(['pending_review', 'approved', 'change_requested']),
             'mobile' => '03'.fake()->numerify('#########'),
             'alternate_mobile' => null,
             'email' => fake()->safeEmail(),

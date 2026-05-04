@@ -53,4 +53,26 @@ class Booking extends Model
     {
         return $this->status === 'confirmed';
     }
+
+    public function needsPassportRenewal(): bool
+    {
+        return $this->persons->contains(fn (Person $person) => $person->passport_renewal_required);
+    }
+
+    public function publicStatus(): string
+    {
+        if ($this->status === 'confirmed') {
+            return 'Confirmed';
+        }
+
+        if ($this->status === 'cancelled') {
+            return 'Cancelled';
+        }
+
+        if ($this->needsPassportRenewal()) {
+            return 'PP Pending Renewal';
+        }
+
+        return 'Submitted';
+    }
 }

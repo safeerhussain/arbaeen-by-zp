@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <link rel="icon" type="image/png" href="/favicon.png">
     <title>@yield('title', 'Arbaeen 2026 — Pakistan to Iraq | Ziarat Planner')</title>
     <meta name="description" content="@yield('meta_description', 'Register for Arbaeen 2026 pilgrimage from Pakistan to Iraq. Two groups — AR01 (23 July) and AR02 (31 July). All shrines, full package from $1,440. Bhojani Brothers × Ziarat Planner.')">
 

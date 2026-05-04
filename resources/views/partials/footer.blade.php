@@ -1,78 +1,57 @@
 <footer class="site-footer mt-auto pt-5 pb-0">
-    <div class="container pb-4">
-        <div class="row g-5">
+    <div class="container text-center pb-4">
 
-            {{-- Brand --}}
-            <div class="col-lg-4">
-                <div class="footer-brand mb-2">Arbaeen 2026</div>
-                <p class="mb-3" style="font-size: 0.825rem; opacity: 0.55">Pakistan to Iraq &middot; 15 Days &middot; 14 Nights</p>
-                <p class="mb-0" style="font-size: 0.825rem; line-height: 1.9">
-                    A joint venture of<br>
-                    <strong class="text-gold">Bhojani Brothers Travel & Tour</strong><br>
-                    <span style="opacity:0.4">&times;</span>
-                    <strong class="text-gold">Ziarat Planner</strong>
-                </p>
-                <p class="mt-3" style="font-size: 0.75rem; opacity: 0.35">
-                    IATA Accredited Agent &middot; Ground Partner: Ziarat Planner, Iraq
-                </p>
-            </div>
+        {{-- Brand --}}
+        <div class="footer-brand mb-1" style="font-size: 1.1rem;">Arbaeen 2026</div>
+        <p class="mb-4" style="font-size: 0.775rem; opacity: 0.45; letter-spacing: 0.04em;">
+            Pakistan to Iraq &middot; 15 Days &middot; 14 Nights
+        </p>
 
-            {{-- Packages --}}
-            <div class="col-lg-2 col-6">
-                <div class="footer-heading">Packages</div>
-                <ul class="list-unstyled mb-0">
-                    <li class="mb-2"><a href="{{ route('ar01') }}">AR01 &mdash; Arbaeen in Karbala</a></li>
-                    <li class="mb-2"><a href="{{ route('ar02') }}">AR02 &mdash; Arbaeen + 28 Safar</a></li>
-                    <li class="mb-2"><a href="{{ route('payment-info') }}">Payment Info</a></li>
-                    <li><a href="{{ route('terms') }}">Terms &amp; Cancellation</a></li>
-                </ul>
-            </div>
+        {{-- Nav --}}
+        <nav class="mb-4">
+            <a href="{{ route('ar01') }}" class="footer-nav-link">AR01</a>
+            <a href="{{ route('ar02') }}" class="footer-nav-link">AR02</a>
+            <a href="{{ route('register') }}" class="footer-nav-link">Register</a>
+            <a href="{{ route('status') }}" class="footer-nav-link">Status</a>
+            <a href="{{ route('questions') }}" class="footer-nav-link">FAQs</a>
+            <a href="{{ route('contact') }}" class="footer-nav-link">Contact</a>
+        </nav>
 
-            {{-- Help --}}
-            <div class="col-lg-2 col-6">
-                <div class="footer-heading">Help</div>
-                <ul class="list-unstyled mb-0">
-                    <li class="mb-2"><a href="{{ route('register') }}">Register</a></li>
-                    <li class="mb-2"><a href="{{ route('status') }}">Check Booking Status</a></li>
-                    <li class="mb-2"><a href="{{ route('questions') }}">FAQs</a></li>
-                    <li><a href="{{ route('contact') }}">Contact Us</a></li>
-                </ul>
-            </div>
-
-            {{-- Contact --}}
-            <div class="col-lg-4">
-                <div class="footer-heading">Contact</div>
-                <address class="mb-3 fst-normal" style="font-size: 0.825rem; opacity: 0.6; line-height: 1.8">
-                    D1, Madni Heights, Soldier Bazar No.3<br>
-                    Karachi, Pakistan
-                </address>
-                <ul class="list-unstyled mb-0">
-                    @foreach(config('arbaeen.contacts') as $contact)
-                    <li class="mb-2">
-                        <span style="font-size:0.75rem; opacity:0.45">{{ $contact['name'] }}</span>
-                        <a href="tel:{{ str_replace(' ', '', $contact['phone']) }}"
-                           class="d-block">{{ $contact['phone'] }}</a>
-                    </li>
-                    @endforeach
-                    <li class="mt-2">
-                        <a href="tel:+922132293244">+92 21 32293 244</a>
-                        <span style="opacity:0.3">&nbsp;&middot;&nbsp;</span>
-                        <a href="tel:+922132293644">+92 21 32293 644</a>
-                    </li>
-                </ul>
-            </div>
-
+        {{-- Social Icons --}}
+        <div class="mb-4 d-flex justify-content-center gap-3">
+            <a href="https://www.facebook.com/ZiaratPlanner/" target="_blank" rel="noopener" class="footer-social-icon" aria-label="Facebook">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                </svg>
+            </a>
+            <a href="https://www.instagram.com/ziaratplanner/" target="_blank" rel="noopener" class="footer-social-icon" aria-label="Instagram">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                    <circle cx="12" cy="12" r="4"/>
+                    <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/>
+                </svg>
+            </a>
+            <a href="https://www.tiktok.com/@ziaratplanner" target="_blank" rel="noopener" class="footer-social-icon" aria-label="TikTok">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.19 8.19 0 0 0 4.79 1.53V6.77a4.85 4.85 0 0 1-1.02-.08z"/>
+                </svg>
+            </a>
         </div>
+
     </div>
 
     <div class="footer-bottom">
-        <div class="container">
-            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
-                <span>&copy; 2026 Ziarat Planner. All rights reserved. Developed by <a href="https://digitaleggheads.com" target="_blank">Digital Eggheads</a></span>
-                <span class="mt-2 mt-md-0">
-                    <a href="{{ route('terms') }}" class="me-3">Terms</a>
-                    <a href="{{ route('contact') }}">Contact</a>
-                </span>
+        <div class="container text-center">
+            <div class="mb-1" style="opacity: 0.4;">
+                <a href="tel:+922132293244">+92 21 32293 244</a>
+                <span class="mx-2">&middot;</span>
+                <a href="tel:+922132293644">+92 21 32293 644</a>
+            </div>
+            <div>
+                &copy; 2026 Ziarat Planner &nbsp;&middot;&nbsp;
+                <a href="{{ route('terms') }}">Terms</a>
+                &nbsp;&middot;&nbsp;
+                Developed by <a href="https://digitaleggheads.com" target="_blank">Digital Eggheads</a>
             </div>
         </div>
     </div>

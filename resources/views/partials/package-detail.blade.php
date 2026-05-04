@@ -63,7 +63,7 @@
             <div class="section-tag mx-auto d-inline-flex">Package Pricing</div>
             <h2 class="display-6 fw-600 ls-tight mt-1">Rates &amp; Pricing</h2>
             <p class="text-muted mt-2" style="max-width:520px;margin:0.75rem auto 0;font-size:0.875rem">
-                All prices in USD per person. Ground-only rate excludes international airfare.
+                All prices in USD per person. Ground-only rate excludes international airfare & visa cost.
             </p>
         </div>
 

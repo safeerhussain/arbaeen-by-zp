@@ -7,7 +7,7 @@
 
 {{-- Hero --}}
 <section class="hero-section section-py-lg"
-         style="background-image: url('https://pic.alkafeel.net/sections/35?lang=ar'); min-height: 88vh; display: flex; align-items: center;">
+         style="background-image: url('{{ asset('images/arbaeen-header.jpg') }}'); min-height: 88vh; display: flex; align-items: center;">
     <div class="container">
         <div class="row justify-content-center text-center">
             <div class="col-lg-8 col-xl-7">
@@ -15,8 +15,8 @@
                 <div class="hero-eyebrow">Arbaeen 2026 · Pakistan to Iraq</div>
 
                 <h1 class="display-2 fw-300 text-white mb-4 ls-tight" style="line-height: 1.05">
-                    Labbaik<br>
-                    <span class="text-gold">Ya Hussain (a.s.)</span>
+                    Arbaeen Ziyarat<br>
+                    <span class="text-gold">from Pakistan</span>
                 </h1>
 
                 <p class="text-white mb-5" style="font-size: 1.05rem; opacity: 0.8; line-height: 1.75; font-weight: 400">
@@ -358,6 +358,32 @@
 
     loadCounts();
     setInterval(loadCounts, 60000);
+
+    // Social proof feed (Module 7)
+    function loadFeed() {
+        fetch('/api/feed')
+            .then(function (r) { return r.json(); })
+            .then(function (items) {
+                if (!items.length) { return; }
+                var container = document.getElementById('feed-items');
+                var feed = document.getElementById('social-feed');
+                if (!container || !feed) { return; }
+                container.innerHTML = '';
+                items.forEach(function (item) {
+                    var pill = document.createElement('span');
+                    pill.style.cssText = 'display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid rgba(0,0,0,0.08);border-radius:2rem;padding:0.3rem 0.85rem;font-size:0.78rem;color:var(--zp-ink)';
+                    pill.innerHTML = '<span style="font-weight:600">' + item.name + '</span>'
+                        + '<span style="opacity:0.5;font-size:0.7rem">·</span>'
+                        + '<span style="opacity:0.65">' + item.city + '</span>'
+                        + '<span style="font-size:0.65rem;font-weight:700;letter-spacing:0.06em;background:rgba(92,15,30,0.1);color:var(--zp-maroon);border-radius:0.25rem;padding:0.1em 0.45em">' + item.group + '</span>';
+                    container.appendChild(pill);
+                });
+                feed.style.display = '';
+            })
+            .catch(function () {});
+    }
+
+    loadFeed();
 }());
 </script>
 @endpush

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->enum('passenger_type', ['adult', 'child_with_bed', 'child_without_bed', 'infant']);
             $table->string('relationship', 50)->nullable(); // spouse, son, daughter, etc.
             $table->date('passport_expiry')->nullable();
-            $table->enum('passport_status', ['pending', 'uploaded', 'approved'])->default('pending');
+            $table->enum('passport_status', ['pending_review', 'approved', 'change_requested'])->default('pending_review');
             // Contact fields — lead only (position = 1)
             $table->string('mobile', 20)->nullable();
             $table->string('alternate_mobile', 20)->nullable();

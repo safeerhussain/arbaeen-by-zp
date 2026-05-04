@@ -2,7 +2,7 @@
     <div class="container">
 
         <a class="navbar-brand d-flex flex-column lh-1" href="{{ route('home') }}">
-            <span>Arbaeen 2026</span>
+            <span>Arbaeen 2026 </span>
             <span class="navbar-brand-sub d-none d-sm-block">Ziarat Planner × Bhojani Brothers</span>
         </a>
 
