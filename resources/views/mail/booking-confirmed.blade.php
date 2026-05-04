@@ -30,7 +30,7 @@
 
     <div class="header">
         <h1>Arbaeen 2026</h1>
-        <p>Ziarat Planner × Bhojani Brothers Travel & Tour</p>
+        <p>Ziarat Planner × Bhojani Brothers Travel & Tours</p>
     </div>
 
     <div class="body">
@@ -86,6 +86,13 @@
                 <li>Quote your booking reference: <strong>{{ $booking->booking_id }}</strong></li>
                 <li>Our team will confirm your seat and begin eVisa processing</li>
             </ol>
+        </div>
+
+        <div style="text-align:center;margin-top:1.75rem">
+            <a href="{{ route('status', ['booking_id' => $booking->booking_id, 'lead_dob' => $booking->lead?->date_of_birth?->format('Y-m-d')]) }}"
+               style="display:inline-block;background:#5C0F1E;color:#C9A961;text-decoration:none;font-weight:700;font-size:0.875rem;padding:0.75rem 2rem;border-radius:0.5rem;letter-spacing:0.02em">
+                Check Booking Status &rarr;
+            </a>
         </div>
 
         <p style="font-size:0.825rem;color:#5A3A28;margin-top:1.5rem;line-height:1.75">

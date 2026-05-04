@@ -91,7 +91,7 @@
                             <p class="fw-700 text-maroon mb-0" style="font-size:1.35rem;letter-spacing:0.03em;font-family:monospace">
                                 {{ $booking->booking_id }}
                             </p>
-                            <p class="text-muted mb-0" style="font-size:0.8rem">Submitted {{ $booking->created_at->format('j M Y') }}</p>
+                            <p class="text-muted mb-0" style="font-size:0.8rem">Submitted {{ $booking->created_at->timezone('Asia/Karachi')->format('j M Y') }}</p>
                         </div>
                         <span class="badge fs-6"
                               style="font-size:0.8rem!important;padding:0.5rem 1rem;
@@ -154,7 +154,7 @@
                                         @php
                                         $docBadge = match($person->passport_status) {
                                             'approved'         => ['rgba(40,167,69,0.12);color:#155724', 'Approved'],
-                                            'change_requested' => ['rgba(220,53,69,0.12);color:#721c24', 'Change Requested'],
+                                            'change_requested' => ['rgba(255,193,7,0.18);color:#856404', 'Change Requested'],
                                             default            => ['rgba(232,101,31,0.12);color:var(--zp-orange)', 'Pending Review'],
                                         };
                                         @endphp
@@ -162,8 +162,8 @@
                                             {{ $docBadge[1] }}
                                         </span>
                                         @if($person->passport_renewal_required && $person->passport_status !== 'approved')
-                                        <span class="badge mt-1 d-block" style="font-size:0.6rem;background:rgba(220,53,69,0.1);color:#721c24">
-                                            Renewal Pending
+                                        <span class="badge mt-1" style="font-size:0.6rem;background:rgba(220,53,69,0.1);color:#721c24">
+                                            PP Renewal Pending
                                         </span>
                                         @endif
                                     </td>
@@ -198,7 +198,7 @@
                                 <p class="fw-600 mb-0" style="font-size:0.875rem;color:var(--zp-ink)">{{ $stage['label'] }}</p>
                                 <p class="text-muted mb-0" style="font-size:0.78rem">
                                     @if($paid)
-                                    Paid {{ $paid->paid_at->format('j M Y') }} — ${{ number_format($paid->amount_usd) }}
+                                    Paid {{ $paid->paid_at->timezone('Asia/Karachi')->format('j M Y') }} — ${{ number_format($paid->amount_usd) }}
                                     @else
                                     Not yet paid
                                     @endif

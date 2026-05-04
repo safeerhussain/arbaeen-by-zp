@@ -47,7 +47,7 @@
                     </div>
                     <div class="col-6 col-md-3">
                         <p class="text-muted mb-1" style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.08em">Registered</p>
-                        <p class="fw-600 mb-0">{{ $booking->created_at->format('j M Y, H:i') }}</p>
+                        <p class="fw-600 mb-0">{{ $booking->created_at->timezone('Asia/Karachi')->format('j M Y, H:i') }}</p>
                     </div>
                     <div class="col-6 col-md-3">
                         <p class="text-muted mb-1" style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.08em">Heard Via</p>
@@ -88,7 +88,7 @@
                     $docColors = [
                         'pending_review'   => 'rgba(232,101,31,0.12);color:var(--zp-orange)',
                         'approved'         => 'rgba(40,167,69,0.12);color:#155724',
-                        'change_requested' => 'rgba(195, 162, 83, 0.18);color:#856404',
+                        'change_requested' => 'rgba(255,193,7,0.18);color:#856404',
                     ];
                     $docLabels = [
                         'pending_review'   => 'Pending Review',
@@ -281,7 +281,7 @@
                     @if($paid)
                     <div class="d-flex justify-content-between align-items-center mt-1 p-2 rounded-2" style="background:rgba(40,167,69,0.07)">
                         <p class="text-success mb-0 fw-600" style="font-size:0.78rem">
-                            ✓ {{ $paid->paid_at->format('j M Y') }}
+                            ✓ {{ $paid->paid_at->timezone('Asia/Karachi')->format('j M Y') }}
                             @if($paid->notes)<span class="fw-400 text-muted"> · {{ $paid->notes }}</span>@endif
                         </p>
                         <span class="fw-700 text-success" style="font-size:0.82rem">${{ number_format($paid->amount_usd) }}</span>
@@ -435,7 +435,7 @@ $photoDoc    = $person->documents->firstWhere('type', 'photo');
                                 <p class="fw-600 mb-1" style="font-size:0.78rem;color:var(--zp-ink)">{{ $docLabel }}</p>
                                 @if($doc)
                                 <p class="text-muted mb-2" style="font-size:0.72rem;word-break:break-all">{{ $doc->original_filename }}</p>
-                                <p class="text-muted mb-2" style="font-size:0.7rem">{{ number_format($doc->file_size / 1024, 1) }} KB &middot; uploaded {{ $doc->uploaded_at->format('j M Y') }}</p>
+                                <p class="text-muted mb-2" style="font-size:0.7rem">{{ number_format($doc->file_size / 1024, 1) }} KB &middot; uploaded {{ $doc->uploaded_at->timezone('Asia/Karachi')->format('j M Y') }}</p>
                                 <a href="{{ route('admin.document.serve', $doc->id) }}" target="_blank" rel="noopener"
                                    class="btn btn-sm btn-outline-primary" style="font-size:0.72rem;padding:0.2rem 0.6rem">
                                     View / Download
