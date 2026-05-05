@@ -187,7 +187,7 @@
                                         @error('persons.0.full_name')<div class="text-danger mt-1" style="font-size:0.8rem">{{ $message }}</div>@enderror
                                     </div>
                                     <div class="col-md-6">
-                                        <label class="form-label fw-500" style="font-size:0.85rem">Father's Name</label>
+                                        <label class="form-label fw-500" style="font-size:0.85rem">Father/Husband Name</label>
                                         <input type="text" name="persons[0][fathers_name]" class="form-control" placeholder="Optional"
                                                value="{{ old('persons.0.fathers_name') }}">
                                     </div>
@@ -296,12 +296,12 @@
                                 <div class="row g-3">
                                     <div class="col-md-6">
                                         <label class="form-label fw-500" style="font-size:0.85rem">
-                                            Passport Scan <span class="text-danger">*</span>
-                                            <span class="text-muted fw-400"> (first page with photo)</span>
+                                            Passport Scan <span class="text-muted fw-400">(optional)</span>
+                                            <span class="text-muted fw-400"> · first page with photo</span>
                                         </label>
                                         <input type="file" name="persons[0][passport_scan]" class="form-control"
                                                accept=".jpg,.jpeg,.png,.pdf"
-                                               data-validate="file" data-label="Passport Scan"
+                                               data-label="Passport Scan"
                                                data-accept="jpg,jpeg,png,pdf" data-maxsize="5242880">
                                         <div class="form-text">JPG, PNG or PDF · Max 5 MB</div>
                                         <div class="field-feedback text-danger mt-1" style="font-size:0.8rem;display:none"></div>
@@ -309,11 +309,11 @@
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label fw-500" style="font-size:0.85rem">
-                                            Passport-Size Photo <span class="text-danger">*</span>
+                                            Passport-Size Photo <span class="text-muted fw-400">(optional)</span>
                                         </label>
                                         <input type="file" name="persons[0][passport_photo]" class="form-control"
                                                accept=".jpg,.jpeg,.png"
-                                               data-validate="file" data-label="Passport Photo"
+                                               data-label="Passport Photo"
                                                data-accept="jpg,jpeg,png" data-maxsize="3145728">
                                         <div class="form-text">JPG or PNG · Max 3 MB</div>
                                         <div class="field-feedback text-danger mt-1" style="font-size:0.8rem;display:none"></div>
@@ -469,7 +469,7 @@
                                 <div class="field-feedback text-danger mt-1" style="font-size:0.8rem;display:none"></div>
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label" style="font-size:0.82rem;font-weight:500">Father's Name</label>
+                                <label class="form-label" style="font-size:0.82rem;font-weight:500">Father/Husband Name</label>
                                 <input type="text" name="persons[__IDX__][fathers_name]" class="form-control form-control-sm" placeholder="Optional">
                             </div>
                             <div class="col-md-4">
@@ -548,23 +548,23 @@
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <label class="form-label" style="font-size:0.82rem;font-weight:500">
-                                    Passport Scan <span class="text-danger">*</span>
-                                    <span class="text-muted fw-400"> (first page with photo)</span>
+                                    Passport Scan <span class="text-muted fw-400">(optional)</span>
+                                    <span class="text-muted fw-400"> · first page with photo</span>
                                 </label>
                                 <input type="file" name="persons[__IDX__][passport_scan]" class="form-control form-control-sm"
                                        accept=".jpg,.jpeg,.png,.pdf"
-                                       data-validate="file" data-label="Passport Scan"
+                                       data-label="Passport Scan"
                                        data-accept="jpg,jpeg,png,pdf" data-maxsize="5242880">
                                 <div class="form-text" style="font-size:0.75rem">JPG, PNG or PDF · Max 5 MB</div>
                                 <div class="field-feedback text-danger mt-1" style="font-size:0.8rem;display:none"></div>
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label" style="font-size:0.82rem;font-weight:500">
-                                    Passport-Size Photo <span class="text-danger">*</span>
+                                    Passport-Size Photo <span class="text-muted fw-400">(optional)</span>
                                 </label>
                                 <input type="file" name="persons[__IDX__][passport_photo]" class="form-control form-control-sm"
                                        accept=".jpg,.jpeg,.png"
-                                       data-validate="file" data-label="Passport Photo"
+                                       data-label="Passport Photo"
                                        data-accept="jpg,jpeg,png" data-maxsize="3145728">
                                 <div class="form-text" style="font-size:0.75rem">JPG or PNG · Max 3 MB</div>
                                 <div class="field-feedback text-danger mt-1" style="font-size:0.8rem;display:none"></div>

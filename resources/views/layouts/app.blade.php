@@ -30,6 +30,7 @@
     @include('partials.whatsapp-float')
 
     @stack('scripts')
+    @stack('body-end')
 
 </body>
 </html>

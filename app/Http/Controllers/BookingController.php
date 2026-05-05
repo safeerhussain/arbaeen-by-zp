@@ -51,8 +51,8 @@ class BookingController extends Controller
             'persons.*.relationship' => ['nullable', 'string', 'max:50'],
             'persons.*.passport_expiry' => ['nullable', 'date'],
             'persons.*.passport_renewal_confirmed' => ['nullable', 'boolean'],
-            'persons.*.passport_scan' => ['required', 'file', 'mimes:jpg,jpeg,png,pdf', 'max:5120'],
-            'persons.*.passport_photo' => ['required', 'file', 'mimes:jpg,jpeg,png', 'max:3072'],
+            'persons.*.passport_scan' => ['nullable', 'file', 'mimes:jpg,jpeg,png,pdf', 'max:5120'],
+            'persons.*.passport_photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png', 'max:3072'],
             'persons.0.mobile' => ['required', 'string', 'max:20'],
             'persons.0.alternate_mobile' => ['nullable', 'string', 'max:20'],
             'persons.0.email' => ['required', 'email', 'max:150'],
@@ -87,8 +87,12 @@ class BookingController extends Controller
                 $position = $i + 1;
                 $passengerType = $personData['passenger_type'];
                 $priceUsd = $pricing[$pricingKey][$passengerType] ?? 0;
-                $expiryDate = Carbon::parse($personData['passport_expiry']);
-                $needsRenewal = $expiryDate->lt($passportMinDate);
+                $expiryDate = isset($personData['passport_expiry']) ? Carbon::parse($personData['passport_expiry']) : null;
+                $needsRenewal = $expiryDate ? $expiryDate->lt($passportMinDate) : false;
+
+                $scanFile = $request->file("persons.{$i}.passport_scan");
+                $photoFile = $request->file("persons.{$i}.passport_photo");
+                $hasDocuments = ($scanFile && $scanFile->isValid()) || ($photoFile && $photoFile->isValid());
 
                 $personPayload = [
                     'booking_id' => $booking->id,
@@ -100,9 +104,9 @@ class BookingController extends Controller
                     'date_of_birth' => $personData['date_of_birth'],
                     'passenger_type' => $passengerType,
                     'relationship' => $position === 1 ? null : ($personData['relationship'] ?? null),
-                    'passport_expiry' => $personData['passport_expiry'],
+                    'passport_expiry' => $personData['passport_expiry'] ?? null,
                     'passport_renewal_required' => $needsRenewal,
-                    'passport_status' => 'pending_review',
+                    'passport_status' => $hasDocuments ? 'pending_review' : 'missing',
                     'price_usd' => $priceUsd,
                 ];
 
@@ -117,8 +121,7 @@ class BookingController extends Controller
 
                 $person = Person::create($personPayload);
 
-                foreach (['passport_scan' => 'passport', 'passport_photo' => 'photo'] as $inputKey => $docType) {
-                    $file = $request->file("persons.{$i}.{$inputKey}");
+                foreach (['passport_scan' => ['passport', $scanFile], 'passport_photo' => ['photo', $photoFile]] as $inputKey => [$docType, $file]) {
                     if ($file && $file->isValid()) {
                         $path = $file->store("uploads/{$bookingId}", 'local');
                         Document::create([

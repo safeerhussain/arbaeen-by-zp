@@ -14,7 +14,7 @@
 
                 <div class="hero-eyebrow">Arbaeen Packages 2026 · Pakistan to Iraq</div>
 
-                <h1 class="display-2 fw-300 text-white mb-4 ls-tight" style="line-height: 1.05">
+                <h1 class="display-2 fw-500 text-white mb-4 ls-tight" style="line-height: 1.05">
                     Arbaeen Ziyarat<br>
                     <span class="text-gold">from Pakistan</span>
                 </h1>

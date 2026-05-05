@@ -155,6 +155,7 @@
                                         $docBadge = match($person->passport_status) {
                                             'approved'         => ['rgba(40,167,69,0.12);color:#155724', 'Approved'],
                                             'change_requested' => ['rgba(255,193,7,0.18);color:#856404', 'Change Requested'],
+                                            'missing'          => ['rgba(80,80,80,0.12);color:#4a4a4a', 'Missing'],
                                             default            => ['rgba(232,101,31,0.12);color:var(--zp-orange)', 'Pending Review'],
                                         };
                                         @endphp

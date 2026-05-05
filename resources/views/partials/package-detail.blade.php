@@ -27,6 +27,18 @@
                     </a>
                 </div>
 
+                <div class="mt-4">
+                    <a href="/package-pdfs/{{ $group['code'] }}_Poster.pdf" download
+                       class="d-inline-flex align-items-center gap-2"
+                       style="color:rgba(201,169,97,0.8);font-size:0.82rem;font-weight:600;letter-spacing:0.04em;text-decoration:none">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
+                            <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z"/>
+                        </svg>
+                        Download Day-by-Day Itinerary PDF
+                    </a>
+                </div>
+
             </div>
         </div>
     </div>
@@ -51,6 +63,34 @@
                 </p>
             </div>
             @endforeach
+        </div>
+    </div>
+</div>
+
+{{-- Itinerary Download Banner --}}
+<div style="background: linear-gradient(90deg, var(--zp-maroon) 0%, #6b1020 100%); border-bottom: 1px solid rgba(201,169,97,0.25);">
+    <div class="container py-4">
+        <div class="d-flex flex-column flex-md-row align-items-center justify-content-between gap-3">
+            <div class="d-flex align-items-center gap-3">
+                <span style="font-size:1.5rem;line-height:1;flex-shrink:0">📄</span>
+                <div>
+                    <p class="mb-0 fw-700 text-white" style="font-size:0.95rem;letter-spacing:-0.01em">
+                        Group {{ $group['code'] }} — Day-by-Day Itinerary
+                    </p>
+                    <p class="mb-0" style="font-size:0.78rem;color:rgba(255,255,255,0.6);margin-top:2px">
+                        Full programme, city schedule &amp; key dates in one PDF
+                    </p>
+                </div>
+            </div>
+            <a href="/package-pdfs/{{ $group['code'] }}_Poster.pdf" download
+               class="btn btn-lg flex-shrink-0 d-inline-flex align-items-center gap-2 fw-700"
+               style="background:var(--zp-gold);color:var(--zp-ink);border:none;font-size:0.875rem;padding:0.65rem 1.75rem;border-radius:0.5rem;white-space:nowrap">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
+                    <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z"/>
+                </svg>
+                Download Itinerary PDF
+            </a>
         </div>
     </div>
 </div>

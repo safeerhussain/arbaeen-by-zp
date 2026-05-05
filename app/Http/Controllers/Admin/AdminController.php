@@ -115,7 +115,7 @@ class AdminController extends Controller
         $person = Person::findOrFail($personId);
 
         $data = $request->validate([
-            'passport_status' => ['required', 'in:pending_review,approved,change_requested'],
+            'passport_status' => ['required', 'in:pending_review,approved,change_requested,missing'],
         ]);
 
         $person->update(['passport_status' => $data['passport_status']]);

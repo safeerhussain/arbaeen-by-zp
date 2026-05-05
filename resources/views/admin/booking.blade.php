@@ -89,11 +89,13 @@
                         'pending_review'   => 'rgba(232,101,31,0.12);color:var(--zp-orange)',
                         'approved'         => 'rgba(40,167,69,0.12);color:#155724',
                         'change_requested' => 'rgba(255,193,7,0.18);color:#856404',
+                        'missing'          => 'rgba(80,80,80,0.12);color:#4a4a4a',
                     ];
                     $docLabels = [
                         'pending_review'   => 'Pending Review',
                         'approved'         => 'Approved',
                         'change_requested' => 'Change Requested',
+                        'missing'          => 'Missing',
                     ];
                     @endphp
                     <thead style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--zp-ink-soft);background:rgba(0,0,0,0.02)">
@@ -462,6 +464,7 @@ $photoDoc    = $person->documents->firstWhere('type', 'photo');
                                 <option value="pending_review"   {{ $person->passport_status === 'pending_review'   ? 'selected' : '' }}>Pending Review</option>
                                 <option value="approved"         {{ $person->passport_status === 'approved'         ? 'selected' : '' }}>Approved</option>
                                 <option value="change_requested" {{ $person->passport_status === 'change_requested' ? 'selected' : '' }}>Change Requested</option>
+                                <option value="missing"          {{ $person->passport_status === 'missing'          ? 'selected' : '' }}>Missing</option>
                             </select>
                         </div>
                         <button type="submit" class="btn btn-primary btn-sm fw-600" style="font-size:0.8rem;white-space:nowrap">
