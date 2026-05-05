@@ -34,7 +34,7 @@
                 </div>
 
                 <p class="mt-4" style="font-size: 0.75rem; opacity: 0.45; letter-spacing: 0.08em; text-transform: uppercase">
-                    Max 135 zaireen per group &nbsp;&middot;&nbsp; Families welcome &nbsp;&middot;&nbsp; Limited seats
+                    Max 135 zaireen per group &nbsp;&middot;&nbsp; Families welcomed &nbsp;&middot;&nbsp; Limited seats
                 </p>
 
             </div>
