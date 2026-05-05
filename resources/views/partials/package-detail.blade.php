@@ -190,7 +190,7 @@
                 ['🚌', 'AC Transport',             'All transfers included — airport pickups, city buses, and Arbaeen Walk transport arrangements.'],
                 ['👳', 'Group Maulana',            'A religious scholar accompanies the group throughout for daily majalis and spiritual guidance.'],
                 ['🎵', 'Noha Khuwan',              'Group Noha reciter present throughout the journey.'],
-                ['🧳', 'Luggage Handling',         'Assistance with luggage at all hotels and during all transfers.'],
+                ['🧳', 'Luggage Handling',         'Assistance with luggage at all hotels and during all transfers. Airport luggage assistance not included.'],
             ] as [$icon, $title, $desc])
             <div class="col-md-6 col-lg-3">
                 <div class="info-card h-100">
@@ -239,7 +239,7 @@
                     <p class="mb-0 text-muted" style="font-size:0.825rem;line-height:1.7">
                         The Arbaeen Walk is optional. Non-walkers remain at the Najaf hotel with their luggage
                         and are transported by group bus to Karbala to perform Ziyarat-e-Arbaeen on 20 Safar,
-                        returning the same day. Please indicate your preference on the registration form.
+                        returning the same day.
                     </p>
                 </div>
             </div>
