@@ -186,7 +186,7 @@
                 ['✈️', 'International Airfare',    'Return flights from Karachi, Lahore, or Islamabad to Iraq (Baghdad or Najaf).'],
                 ['🛂', 'Iraq eVisa',               'Full visa processing and eVisa application included in the package price.'],
                 ['🏨', 'Hotel Accommodation',      '14 nights in quality hotels — Karbala (6), Kadhimiya (2), Najaf (6) — all within walking distance from Haramin.'],
-                ['🍽️', 'All Meals',               'Breakfast, lunch, and dinner throughout the entire 15-day trip.'],
+                ['🍽️', 'All Meals',               'Breakfast, lunch, and dinner throughout the entire 15-day trip. Except during the Walk'],
                 ['🚌', 'AC Transport',             'All transfers included — airport pickups, city buses, and Arbaeen Walk transport arrangements.'],
                 ['👳', 'Group Maulana',            'A religious scholar accompanies the group throughout for daily majalis and spiritual guidance.'],
                 ['🎵', 'Noha Khuwan',              'Group Noha reciter present throughout the journey.'],
