@@ -83,7 +83,9 @@
 
         <div class="row justify-content-center">
             <div class="col-lg-10">
-                <div class="table-responsive">
+
+                {{-- Desktop table (md+) --}}
+                <div class="d-none d-md-block table-responsive">
                     <table class="table table-hover align-middle mb-0">
                         <thead>
                             <tr style="font-size:0.78rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--zp-ink-soft)">
@@ -116,6 +118,44 @@
                             @endforeach
                         </tbody>
                     </table>
+                </div>
+
+                {{-- Mobile cards (< md) --}}
+                <div class="d-md-none">
+                    @foreach([
+                        ['Adult (12+ yrs)',              'adult'],
+                        ['Child — with bed (2–11 yrs)',   'child_with_bed'],
+                        ['Child — no bed (2–11 yrs)',     'child_without_bed'],
+                        ['Infant (0–1 yr)',               'infant'],
+                    ] as [$label, $key])
+                    <div class="rounded-3 mb-3 overflow-hidden" style="border:1px solid rgba(92,15,30,0.15)">
+                        <div class="px-3 py-2 fw-600" style="font-size:0.85rem;background:rgba(92,15,30,0.05);color:var(--zp-ink);border-bottom:1px solid rgba(92,15,30,0.12)">
+                            {{ $label }}
+                        </div>
+                        <div class="row g-0">
+                            @foreach([
+                                ['Karachi',      'karachi'],
+                                ['Lahore',       'lahore'],
+                                ['Islamabad',    'islamabad'],
+                                ['Ground Only',  'ground_only'],
+                            ] as [$cityLabel, $city])
+                            <div class="col-6 px-3 py-2 {{ !$loop->last && $loop->index < 2 ? 'border-bottom' : '' }} {{ $loop->index % 2 === 0 ? 'border-end' : '' }}"
+                                 style="border-color:rgba(92,15,30,0.1)!important">
+                                <p class="mb-1" style="font-size:0.6rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--zp-ink-soft)">
+                                    {{ $cityLabel }}
+                                </p>
+                                <p class="mb-0 fw-700 text-maroon" style="font-size:0.95rem">
+                                    @if($pricing[$city][$key] === 0)
+                                        <span class="badge bg-secondary fw-500" style="font-size:0.72rem">Free</span>
+                                    @else
+                                        ${{ number_format($pricing[$city][$key]) }}
+                                    @endif
+                                </p>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+                    @endforeach
                 </div>
 
                 @php $discount = config('arbaeen.campaign_discount'); @endphp

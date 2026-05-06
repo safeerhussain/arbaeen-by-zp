@@ -79,8 +79,8 @@ return [
             'infant' => 450,
         ],
         'ground_only' => [
-            'adult' => 600,
-            'child_with_bed' => 300,
+            'adult' => 650,
+            'child_with_bed' => 600,
             'child_without_bed' => 300,
             'infant' => 0,
         ],
