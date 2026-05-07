@@ -15,7 +15,7 @@
     <meta property="og:url"         content="{{ url()->current() }}">
     <meta property="og:title"       content="@yield('og_title', 'Arbaeen 2026 — Pakistan to Iraq | Ziarat Planner')">
     <meta property="og:description" content="@yield('og_description', 'Register for Arbaeen 2026 pilgrimage from Pakistan to Iraq. Two groups — AR01 (23 July) and AR02 (31 July). All inclusive package from $1,440.')">
-    <meta property="og:image"       content="@yield('og_image', url('/images/arbaeen-featured-image_zpxbb.png'))">
+    <meta property="og:image"       content="@yield('og_image', url('/images/arbaeen-featured-image_zpxbb.png') . '?v=2')">
     <meta property="og:image:width"  content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:image:alt"   content="Arbaeen 2026 pilgrimage — Ziarat Planner">
@@ -24,7 +24,7 @@
     <meta name="twitter:card"        content="summary_large_image">
     <meta name="twitter:title"       content="@yield('og_title', 'Arbaeen 2026 — Pakistan to Iraq | Ziarat Planner')">
     <meta name="twitter:description" content="@yield('og_description', 'Register for Arbaeen 2026 pilgrimage from Pakistan to Iraq. Two groups — AR01 (23 July) and AR02 (31 July). All inclusive package from $1,440.')">
-    <meta name="twitter:image"       content="@yield('og_image', url('/images/arbaeen-header.jpg'))">
+    <meta name="twitter:image"       content="@yield('og_image', url('/images/arbaeen-featured-image_zpxbb.png') . '?v=2')">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
