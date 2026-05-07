@@ -9,6 +9,23 @@
     <title>@yield('title', 'Arbaeen 2026 — Pakistan to Iraq | Ziarat Planner')</title>
     <meta name="description" content="@yield('meta_description', 'Register for Arbaeen 2026 pilgrimage from Pakistan to Iraq. Two groups — AR01 (23 July) and AR02 (31 July). All inclusive package from $1,440. Ziarat Planner × Bhojani Brothers .')">
 
+    {{-- Open Graph (Facebook, WhatsApp, LinkedIn) --}}
+    <meta property="og:type"        content="website">
+    <meta property="og:site_name"   content="Arbaeen 2026 — Ziarat Planner">
+    <meta property="og:url"         content="{{ url()->current() }}">
+    <meta property="og:title"       content="@yield('og_title', 'Arbaeen 2026 — Pakistan to Iraq | Ziarat Planner')">
+    <meta property="og:description" content="@yield('og_description', 'Register for Arbaeen 2026 pilgrimage from Pakistan to Iraq. Two groups — AR01 (23 July) and AR02 (31 July). All inclusive package from $1,440.')">
+    <meta property="og:image"       content="@yield('og_image', url('/images/arbaeen-featured-image.png'))">
+    <meta property="og:image:width"  content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt"   content="Arbaeen 2026 pilgrimage — Ziarat Planner">
+
+    {{-- Twitter / X card --}}
+    <meta name="twitter:card"        content="summary_large_image">
+    <meta name="twitter:title"       content="@yield('og_title', 'Arbaeen 2026 — Pakistan to Iraq | Ziarat Planner')">
+    <meta name="twitter:description" content="@yield('og_description', 'Register for Arbaeen 2026 pilgrimage from Pakistan to Iraq. Two groups — AR01 (23 July) and AR02 (31 July). All inclusive package from $1,440.')">
+    <meta name="twitter:image"       content="@yield('og_image', url('/images/arbaeen-header.jpg'))">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&display=swap" rel="stylesheet">
