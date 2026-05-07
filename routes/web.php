@@ -56,5 +56,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/booking/{bookingId}/payment/{stage}/paid', [AdminController::class, 'markPaymentPaid'])->name('booking.payment.paid');
         Route::post('/person/{personId}/doc-status', [AdminController::class, 'updatePersonDocStatus'])->name('person.doc-status');
         Route::get('/document/{documentId}', [AdminController::class, 'serveDocument'])->name('document.serve');
+        Route::get('/group/{group}/download', [AdminController::class, 'downloadGroupList'])->name('group.download');
     });
 });

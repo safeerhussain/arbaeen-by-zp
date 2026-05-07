@@ -13,6 +13,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class AdminController extends Controller
 {
@@ -136,6 +137,107 @@ class AdminController extends Controller
         return response($contents, 200, [
             'Content-Type' => $document->mime_type,
             'Content-Disposition' => 'inline; filename="'.$document->original_filename.'"',
+        ]);
+    }
+
+    public function downloadGroupList(string $group): StreamedResponse
+    {
+        $group = strtoupper($group);
+        abort_unless(in_array($group, ['AR01', 'AR02']), 404);
+
+        $bookings = Booking::with([
+            'persons' => fn ($q) => $q->orderBy('position'),
+            'paymentStages',
+        ])
+            ->where('group', $group)
+            ->get()
+            ->sortBy(fn ($b) => strtolower($b->persons->firstWhere('position', 1)?->full_name ?? ''))
+            ->values();
+
+        $filename = $group.'_group_list_'.now()->format('Ymd_His').'.csv';
+
+        $columns = [
+            // Identity
+            'Booking ID', 'Full Name', "Father's Name",
+            // Booking status
+            'Status', 'Departure City',
+            // Traveller details
+            'Gender', 'Date of Birth', 'Passenger Type', 'City',
+            // Passport / docs
+            'Passport Status', 'Passport Expiry', 'Passport Renewal Required',
+            // Payment
+            'Total Paid (USD)', 'Stages Paid', 'Price (USD)',
+            // Special needs
+            'Wheelchair Required', 'Medical Notes',
+            // Booking metadata
+            'Package Type', 'Campaign Discount', 'Previous Arbaeen', 'Confirmed At', 'Registered At',
+            // Contact
+            'Lead Name', 'Is Lead', 'Relationship', 'Mobile', 'Alternate Mobile', 'Email',
+            // Admin reference
+            'Person ID', 'Position',
+        ];
+
+        $callback = function () use ($bookings, $columns): void {
+            $handle = fopen('php://output', 'w');
+            fwrite($handle, "\xEF\xBB\xBF"); // UTF-8 BOM for Excel
+            fputcsv($handle, $columns);
+
+            foreach ($bookings as $booking) {
+                $leadName = $booking->persons->firstWhere('position', 1)?->full_name ?? '';
+                $totalPaid = $booking->paymentStages->sum('amount_usd');
+                $stagesPaid = $booking->paymentStages->pluck('stage')->sort()->implode(', ');
+
+                foreach ($booking->persons->sortBy('position') as $person) {
+                    fputcsv($handle, [
+                        // Identity
+                        $booking->booking_id,
+                        $person->full_name,
+                        $person->fathers_name ?? '',
+                        // Booking status
+                        ucfirst($booking->status),
+                        ucfirst($booking->departure_city),
+                        // Traveller details
+                        ucfirst($person->gender),
+                        $person->date_of_birth?->format('d M Y') ?? '',
+                        ucwords(str_replace('_', ' ', $person->passenger_type)),
+                        $person->city ?? '',
+                        // Passport / docs
+                        ucwords(str_replace('_', ' ', $person->passport_status)),
+                        $person->passport_expiry?->format('d M Y') ?? '',
+                        $person->passport_renewal_required ? 'Yes' : 'No',
+                        // Payment
+                        $totalPaid,
+                        $stagesPaid,
+                        $person->price_usd,
+                        // Special needs
+                        $person->wheelchair_required ? 'Yes' : 'No',
+                        $person->medical_notes ?? '',
+                        // Booking metadata
+                        $booking->package_type === 'full' ? 'Full Package' : 'Ground Only',
+                        $booking->campaign_discount ? 'Yes' : 'No',
+                        $booking->previous_arbaeen ? 'Yes' : 'No',
+                        $booking->confirmed_at ? $booking->confirmed_at->format('d M Y') : '',
+                        $booking->created_at->format('d M Y'),
+                        // Contact
+                        $leadName,
+                        $person->position === 1 ? 'Yes' : 'No',
+                        $person->relationship ?? '',
+                        $person->mobile ?? '',
+                        $person->alternate_mobile ?? '',
+                        $person->email ?? '',
+                        // Admin reference
+                        $person->person_id,
+                        $person->position,
+                    ]);
+                }
+            }
+
+            fclose($handle);
+        };
+
+        return response()->stream($callback, 200, [
+            'Content-Type' => 'text/csv; charset=UTF-8',
+            'Content-Disposition' => "attachment; filename=\"{$filename}\"",
         ]);
     }
 

@@ -16,6 +16,16 @@
     @vite(['resources/css/app.scss', 'resources/js/app.js'])
 
     @stack('styles')
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-71XM08RHT7"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-71XM08RHT7');
+    </script>
 </head>
 <body class="bg-cream">
 

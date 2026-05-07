@@ -4,11 +4,19 @@
 
 @section('content')
 
-<div class="d-flex justify-content-between align-items-center mb-4">
+<div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
     <h1 class="fw-700 mb-0" style="font-size:1.25rem;color:var(--zp-ink)">Bookings Dashboard</h1>
-    <a href="{{ route('register') }}" class="btn btn-orange btn-sm" target="_blank">
-        View Registration Form ↗
-    </a>
+    <div class="d-flex gap-2 flex-wrap align-items-center">
+        <a href="{{ route('admin.group.download', 'AR01') }}" class="btn btn-sm btn-outline-secondary">
+            ↓ AR01 List
+        </a>
+        <a href="{{ route('admin.group.download', 'AR02') }}" class="btn btn-sm btn-outline-secondary">
+            ↓ AR02 List
+        </a>
+        <a href="{{ route('register') }}" class="btn btn-orange btn-sm" target="_blank">
+            View Registration Form ↗
+        </a>
+    </div>
 </div>
 
 {{-- Stats strip --}}
