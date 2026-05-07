@@ -7,7 +7,7 @@
 
     <link rel="icon" type="image/png" href="/favicon.png">
     <title>@yield('title', 'Arbaeen 2026 — Pakistan to Iraq | Ziarat Planner')</title>
-    <meta name="description" content="@yield('meta_description', 'Register for Arbaeen 2026 pilgrimage from Pakistan to Iraq. Two groups — AR01 (23 July) and AR02 (31 July). All shrines, full package from $1,440. Bhojani Brothers × Ziarat Planner.')">
+    <meta name="description" content="@yield('meta_description', 'Register for Arbaeen 2026 pilgrimage from Pakistan to Iraq. Two groups — AR01 (23 July) and AR02 (31 July). All inclusive package from $1,440. Ziarat Planner × Bhojani Brothers .')">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
