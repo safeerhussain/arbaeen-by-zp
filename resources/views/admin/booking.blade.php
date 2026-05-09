@@ -246,7 +246,7 @@
                     </div>
                     @if($booking->campaign_discount)
                     <div class="d-flex justify-content-between mt-1" style="font-size:0.78rem">
-                        <span style="color:var(--zp-orange)">Z. Ashura Discount (PKR 15,000)</span>
+                        <span style="color:var(--zp-orange)">Z. Ashura Discount (PKR 14,000)</span>
                         <span class="fw-700" style="color:var(--zp-orange)">−$50</span>
                     </div>
                     @endif

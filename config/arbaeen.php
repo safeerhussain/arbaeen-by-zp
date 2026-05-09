@@ -95,7 +95,7 @@ return [
 
     'campaign_discount' => [
         'label' => '40-Day Ziyarat-e-Ashura Campaign',
-        'amount' => 15000, // PKR
+        'amount' => 14000, // PKR
     ],
 
     'hotels' => [
