@@ -178,6 +178,11 @@
                     Prices are per person and include all group taxes and surcharges.
                     Contact us to confirm current availability and pricing.
                 </p>
+                <ul class="list-unstyled mt-3 text-center" style="font-size:0.78rem;color:var(--zp-ink-soft);line-height:1.8">
+                    <li>In view of current regional conditions, package prices and travel dates are subject to change at any time.</li>
+                    <li>Any additional costs due to new regulations by the Pakistani government or any other authority will be charged separately.</li>
+                    <li>All amounts are charged in PKR based on the exchange rate on the date of payment.</li>
+                </ul>
             </div>
         </div>
 

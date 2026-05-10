@@ -175,10 +175,31 @@
                     </p>
                 </div>
 
+                {{-- Section: Pricing Conditions --}}
+                <div class="mb-5">
+                    <h2 class="fw-700 text-maroon mb-3" style="font-size: 1.15rem; letter-spacing: -0.01em">
+                        6. Pricing &amp; Payment Conditions
+                    </h2>
+                    <ul class="list-unstyled" style="font-size: 0.9rem; line-height: 1.9; color: var(--zp-ink-soft)">
+                        <li class="mb-2 d-flex gap-2">
+                            <span class="text-gold fw-700" style="font-size:0.65rem;margin-top:0.45rem;flex-shrink:0">✦</span>
+                            <span>In view of current regional conditions, package prices and travel dates are subject to change at any time.</span>
+                        </li>
+                        <li class="mb-2 d-flex gap-2">
+                            <span class="text-gold fw-700" style="font-size:0.65rem;margin-top:0.45rem;flex-shrink:0">✦</span>
+                            <span>Any additional costs arising from new regulations imposed by the Pakistani government or any other relevant authority will be charged separately.</span>
+                        </li>
+                        <li class="d-flex gap-2">
+                            <span class="text-gold fw-700" style="font-size:0.65rem;margin-top:0.45rem;flex-shrink:0">✦</span>
+                            <span>All amounts are charged in Pakistani Rupees (PKR) based on the applicable exchange rate on the date of payment.</span>
+                        </li>
+                    </ul>
+                </div>
+
                 {{-- Section: Governing Law --}}
                 <div class="mb-5">
                     <h2 class="fw-700 text-maroon mb-3" style="font-size: 1.15rem; letter-spacing: -0.01em">
-                        6. Governing Terms
+                        7. Governing Terms
                     </h2>
                     <p style="font-size: 0.9rem; line-height: 1.9; color: var(--zp-ink-soft)">
                         These terms are governed by the laws of Pakistan. Any dispute arising from this
