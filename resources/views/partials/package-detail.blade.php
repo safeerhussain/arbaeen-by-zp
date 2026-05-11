@@ -348,6 +348,20 @@
                     <div class="section-tag mx-auto d-inline-flex">Before You Register</div>
                     <h2 class="display-6 fw-600 ls-tight mt-1">Important Notes</h2>
                 </div>
+                <div class="p-4 p-md-5 rounded-4 mb-3"
+                     style="background:rgba(232,101,31,0.07);border:1.5px solid rgba(232,101,31,0.4)">
+                    <div class="d-flex gap-3 align-items-start">
+                        <span style="font-size:1.4rem;flex-shrink:0;line-height:1.3">✈️</span>
+                        <div>
+                            <h4 class="fw-700 text-maroon mb-2" style="font-size:1rem">Ticket &amp; Visa Cost — Estimated at USD 800/person</h4>
+                            <p class="mb-0" style="font-size:0.875rem;line-height:1.75;color:var(--zp-ink-soft)">
+                                Ticket and visa costs are currently estimated at <strong class="text-ink">USD 800 per person</strong>.
+                                Any increase due to changes in airline fares or visa policies will be payable by the pilgrim.
+                                Any reduction in cost will be adjusted as a discount or refund to the pilgrim.
+                            </p>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="p-4 p-md-5 rounded-4 mb-3"
                      style="background:rgba(92,15,30,0.03);border:1.5px solid rgba(92,15,30,0.12)">
@@ -385,6 +399,7 @@
                         </div>
                     </div>
                 </div>
+
 
                 <div class="p-4 rounded-3"
                      style="background:rgba(8,145,178,0.05);border:1px solid rgba(8,145,178,0.2)">

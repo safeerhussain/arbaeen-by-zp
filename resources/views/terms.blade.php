@@ -196,10 +196,28 @@
                     </ul>
                 </div>
 
+                {{-- Section: Ticket & Visa Cost --}}
+                <div class="mb-5">
+                    <h2 class="fw-700 text-maroon mb-3" style="font-size: 1.15rem; letter-spacing: -0.01em">
+                        7. Ticket &amp; Visa Cost Adjustment
+                    </h2>
+                    <div class="p-4 rounded-3"
+                         style="background:rgba(232,101,31,0.08);border:1.5px solid rgba(232,101,31,0.4)">
+                        <div class="d-flex gap-3 align-items-start">
+                            <span class="fw-700 text-orange flex-shrink-0" style="font-size:1.1rem;line-height:1.3">⚠</span>
+                            <p class="mb-0" style="font-size:0.9rem;line-height:1.85;color:var(--zp-ink)">
+                                Ticket and visa costs are currently estimated at <strong>USD 800 per person</strong>.
+                                Any increase due to changes in airline fares or visa policies will be payable by the pilgrim.
+                                Any reduction in cost will be adjusted as a discount or refund to the pilgrim.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
                 {{-- Section: Governing Law --}}
                 <div class="mb-5">
                     <h2 class="fw-700 text-maroon mb-3" style="font-size: 1.15rem; letter-spacing: -0.01em">
-                        7. Governing Terms
+                        8. Governing Terms
                     </h2>
                     <p style="font-size: 0.9rem; line-height: 1.9; color: var(--zp-ink-soft)">
                         These terms are governed by the laws of Pakistan. Any dispute arising from this
