@@ -35,4 +35,9 @@ return [
         ],
     ],
 
+    'zp_live' => [
+        'url'     => env('ZP_LIVE_URL'),
+        'api_key' => env('ZP_API_KEY'),
+    ],
+
 ];

@@ -19,6 +19,7 @@ class Person extends Model
         'booking_id',
         'person_id',
         'position',
+        'zp_ref_id',
         'full_name',
         'fathers_name',
         'gender',

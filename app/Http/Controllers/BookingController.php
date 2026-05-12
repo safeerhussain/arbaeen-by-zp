@@ -6,6 +6,7 @@ use App\Mail\BookingConfirmedMail;
 use App\Models\Booking;
 use App\Models\Document;
 use App\Models\Person;
+use App\Services\ZpCouponService;
 use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -38,6 +39,7 @@ class BookingController extends Controller
             'departure_city' => ['required', 'in:karachi,lahore,islamabad'],
             'package_type' => ['required', 'in:full,ground_only'],
             'campaign_discount' => ['nullable', 'boolean'],
+            'persons.*.zp_ref_id' => ['nullable', 'string', 'max:30'],
             'heard_about_us' => ['nullable', 'string', 'max:100'],
             'previous_arbaeen' => ['nullable', 'boolean'],
             'public_feed_consent' => ['nullable', 'boolean'],
@@ -67,7 +69,20 @@ class BookingController extends Controller
         $pricingKey = $data['package_type'] === 'ground_only' ? 'ground_only' : $data['departure_city'];
         $pricing = config('arbaeen.pricing');
 
-        $booking = DB::transaction(function () use ($data, $request, $group, $pricingKey, $pricing, $passportMinDate) {
+        // Pre-validate coupon codes via zp-live API
+        $couponService = new ZpCouponService();
+        $couponResults = []; // [ personIndex => apiResponse ]
+        foreach ($data['persons'] as $i => $personData) {
+            $code = isset($personData['zp_ref_id']) ? strtoupper(trim($personData['zp_ref_id'])) : null;
+            if ($code) {
+                $result = $couponService->validate($code);
+                if ($result && ($result['valid'] ?? false)) {
+                    $couponResults[$i] = $result;
+                }
+            }
+        }
+
+        $booking = DB::transaction(function () use ($data, $request, $group, $pricingKey, $pricing, $passportMinDate, $couponResults) {
             $seq = str_pad(Booking::where('group', $group)->count() + 1, 3, '0', STR_PAD_LEFT);
             $bookingId = "{$group}-{$seq}";
 
@@ -86,7 +101,15 @@ class BookingController extends Controller
             foreach ($data['persons'] as $i => $personData) {
                 $position = $i + 1;
                 $passengerType = $personData['passenger_type'];
-                $priceUsd = $pricing[$pricingKey][$passengerType] ?? 0;
+                $basePrice = $pricing[$pricingKey][$passengerType] ?? 0;
+                if (isset($couponResults[$i])) {
+                    $cr = $couponResults[$i];
+                    $priceUsd = $cr['discount_type'] === 'percentage'
+                        ? (int) round($basePrice * (1 - $cr['discount_value'] / 100))
+                        : (int) max(0, $basePrice - $cr['discount_value']);
+                } else {
+                    $priceUsd = $basePrice;
+                }
                 $expiryDate = isset($personData['passport_expiry']) ? Carbon::parse($personData['passport_expiry']) : null;
                 $needsRenewal = $expiryDate ? $expiryDate->lt($passportMinDate) : false;
 
@@ -98,6 +121,7 @@ class BookingController extends Controller
                     'booking_id' => $booking->id,
                     'person_id' => "{$bookingId}-".str_pad($position, 2, '0', STR_PAD_LEFT),
                     'position' => $position,
+                    'zp_ref_id' => isset($personData['zp_ref_id']) ? strtoupper(trim($personData['zp_ref_id'])) : null,
                     'full_name' => $personData['full_name'],
                     'fathers_name' => $personData['fathers_name'] ?? null,
                     'gender' => $personData['gender'],
@@ -138,6 +162,14 @@ class BookingController extends Controller
 
             return $booking;
         });
+
+        // Redeem validated coupons
+        foreach ($couponResults as $i => $cr) {
+            $code = strtoupper(trim($data['persons'][$i]['zp_ref_id'] ?? ''));
+            if ($code) {
+                $couponService->redeem($code);
+            }
+        }
 
         $lead = $booking->lead;
         if ($lead?->email) {

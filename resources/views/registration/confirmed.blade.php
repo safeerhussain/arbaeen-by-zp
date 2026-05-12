@@ -100,8 +100,13 @@
                 {{-- Pricing breakdown --}}
                 @php
                 $typeLabels = ['adult' => 'Adult', 'child_with_bed' => 'Child (with bed)', 'child_without_bed' => 'Child (without bed)', 'infant' => 'Infant'];
+                $pricingKey = $booking->package_type === 'ground_only' ? 'ground_only' : $booking->departure_city;
+                $pricing = config('arbaeen.pricing');
                 $byType = $booking->persons->groupBy('passenger_type');
                 $totalPackage = $booking->persons->sum('price_usd');
+                $baseTotal = $booking->persons->sum(fn($p) => $pricing[$pricingKey][$p->passenger_type] ?? $p->price_usd);
+                $couponSavings = $baseTotal - $totalPackage;
+                $couponCodes = $booking->persons->pluck('zp_ref_id')->filter()->unique()->values();
                 $discountUsd = $booking->campaign_discount ? 50 : 0;
                 $netTotal = $totalPackage - $discountUsd;
                 $stage1Due = 150 * $booking->persons->count();
@@ -111,18 +116,41 @@
                         <h3 class="fw-700 text-ink mb-4" style="font-size:1rem">Pricing Breakdown</h3>
                         <table class="table table-sm mb-0" style="font-size:0.875rem">
                             @foreach($byType as $type => $persons)
-                            @php $unitPrice = $persons->first()->price_usd; @endphp
+                            @php $unitBasePrice = $pricing[$pricingKey][$type] ?? $persons->first()->price_usd; @endphp
                             <tr>
                                 <td class="text-muted border-0 pb-2">
                                     {{ $typeLabels[$type] ?? $type }}
                                     @if($persons->count() > 1) × {{ $persons->count() }}@endif
                                 </td>
                                 <td class="text-muted border-0 pb-2" style="width:30%">
-                                    @if($persons->count() > 1)${{ number_format($unitPrice) }} each @endif
+                                    @if($persons->count() > 1)${{ number_format($unitBasePrice) }} each @endif
                                 </td>
-                                <td class="fw-600 border-0 pb-2 text-end">${{ number_format($persons->sum('price_usd')) }}</td>
+                                <td class="fw-600 border-0 pb-2 text-end">${{ number_format($unitBasePrice * $persons->count()) }}</td>
                             </tr>
                             @endforeach
+                            @if($couponSavings > 0)
+                            <tr>
+                                <td class="border-0 pb-2" style="color:#2e7d32">
+                                    Coupon Discount
+                                    @foreach($couponCodes as $code)
+                                    <span class="d-block" style="font-size:0.72rem;font-family:monospace;opacity:0.75">{{ $code }}</span>
+                                    @endforeach
+                                </td>
+                                <td class="border-0 pb-2"></td>
+                                <td class="fw-600 border-0 pb-2 text-end" style="color:#2e7d32">−${{ number_format($couponSavings) }}</td>
+                            </tr>
+                            @elseif($couponCodes->isNotEmpty())
+                            <tr>
+                                <td class="border-0 pb-2 text-muted">
+                                    Coupon Code
+                                    @foreach($couponCodes as $code)
+                                    <span class="d-block" style="font-size:0.72rem;font-family:monospace">{{ $code }}</span>
+                                    @endforeach
+                                </td>
+                                <td class="border-0 pb-2"></td>
+                                <td class="border-0 pb-2 text-end" style="color:#f59e0b;font-size:0.8rem;font-weight:600;">⚠ Pending</td>
+                            </tr>
+                            @endif
                             @if($booking->campaign_discount)
                             <tr>
                                 <td class="border-0 pb-2" style="color:var(--zp-orange)">40-Day Ziyarat-e-Ashura Discount</td>

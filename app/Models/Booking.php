@@ -20,6 +20,7 @@ class Booking extends Model
         'departure_city',
         'package_type',
         'campaign_discount',
+        'zp_ref_id',
         'heard_about_us',
         'previous_arbaeen',
         'public_feed_consent',

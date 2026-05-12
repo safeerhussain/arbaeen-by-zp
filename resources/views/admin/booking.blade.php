@@ -143,8 +143,13 @@
                                 <span class="badge ms-1" style="font-size:0.6rem;background:rgba(220,53,69,0.1);color:#721c24">PP Renewal Due</span>
                                 @endif
                             </td>
-                            <td class="py-3 fw-600 text-maroon">
-                                @if($person->price_usd === 0) Free @else ${{ number_format($person->price_usd) }} @endif
+                            <td class="py-3">
+                                <span class="fw-600 text-maroon d-block">
+                                    @if($person->price_usd === 0) Free @else ${{ number_format($person->price_usd) }} @endif
+                                </span>
+                                @if($person->zp_ref_id)
+                                <span class="d-block" style="font-size:0.65rem;font-family:monospace;color:#2e7d32">{{ $person->zp_ref_id }}</span>
+                                @endif
                             </td>
                             <td class="py-3 pe-4">
                                 <button type="button"
@@ -215,8 +220,11 @@
                 @php
                 $paidStages = $booking->paymentStages->keyBy('stage');
                 $typeLabels = ['adult' => 'Adult', 'child_with_bed' => 'Child (w/ bed)', 'child_without_bed' => 'Child (no bed)', 'infant' => 'Infant'];
+                $pricingKey = $booking->package_type === 'ground_only' ? 'ground_only' : $booking->departure_city;
                 $byType = $booking->persons->groupBy('passenger_type');
                 $totalPackage = $booking->persons->sum('price_usd');
+                $baseTotal = $booking->persons->sum(fn($p) => $pricing[$pricingKey][$p->passenger_type] ?? $p->price_usd);
+                $couponSavings = $baseTotal - $totalPackage;
                 $discountUsd = $booking->campaign_discount ? 50 : 0;
                 $netTotal = $totalPackage - $discountUsd;
 
@@ -235,15 +243,19 @@
                 <div class="mb-4 p-3 rounded-2" style="background:rgba(92,15,30,0.03);border:1px solid rgba(0,0,0,0.07)">
                     <p class="fw-700 mb-2" style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--zp-maroon)">Package Breakdown</p>
                     @foreach($byType as $type => $persons)
+                    @php $unitBasePrice = $pricing[$pricingKey][$type] ?? $persons->first()->price_usd; @endphp
                     <div class="d-flex justify-content-between" style="font-size:0.78rem;margin-bottom:0.2rem">
                         <span class="text-muted">{{ $typeLabels[$type] ?? $type }} × {{ $persons->count() }}</span>
-                        <span class="fw-600">${{ number_format($persons->sum('price_usd')) }}</span>
+                        <span class="fw-600">${{ number_format($unitBasePrice * $persons->count()) }}</span>
                     </div>
                     @endforeach
-                    <div class="d-flex justify-content-between mt-2 pt-2" style="font-size:0.8rem;border-top:1px solid rgba(0,0,0,0.07)">
-                        <span class="text-muted">Package Total</span>
-                        <span class="fw-600">${{ number_format($totalPackage) }}</span>
+                    @if($couponSavings > 0)
+                    @php $couponCodes = $booking->persons->pluck('zp_ref_id')->filter()->unique()->values(); @endphp
+                    <div class="d-flex justify-content-between mt-1" style="font-size:0.78rem">
+                        <span style="color:#2e7d32">Coupon ({{ $couponCodes->implode(', ') }})</span>
+                        <span class="fw-700" style="color:#2e7d32">−${{ number_format($couponSavings) }}</span>
                     </div>
+                    @endif
                     @if($booking->campaign_discount)
                     <div class="d-flex justify-content-between mt-1" style="font-size:0.78rem">
                         <span style="color:var(--zp-orange)">Z. Ashura Discount (PKR 14,000)</span>
@@ -414,6 +426,12 @@ $photoDoc    = $person->documents->firstWhere('type', 'photo');
                                 <td class="fw-500">{{ $person->medical_notes }}</td>
                             </tr>
                             @endif
+                            @endif
+                            @if($person->zp_ref_id)
+                            <tr>
+                                <td class="text-muted ps-0">Coupon Code</td>
+                                <td class="fw-600" style="font-family:monospace;color:#2e7d32">{{ $person->zp_ref_id }}</td>
+                            </tr>
                             @endif
                             <tr>
                                 <td class="text-muted ps-0">Price (USD)</td>

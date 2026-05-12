@@ -131,8 +131,8 @@
                                     @error('package_type')<div class="text-danger mt-1" style="font-size:0.8rem">{{ $message }}</div>@enderror
                                 </div>
 
-                                {{-- Campaign discount --}}
-                                <div class="mb-4">
+                                {{-- Campaign discount (temporarily disabled — coupon-based discount is active instead) --}}
+                                {{-- <div class="mb-4">
                                     <div class="p-3 rounded-3" style="background:rgba(201,169,97,0.1);border:1px solid rgba(201,169,97,0.3)">
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" name="campaign_discount" value="1"
@@ -145,7 +145,7 @@
                                             </p>
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
 
                                 {{-- Heard about us --}}
                                 <div class="mb-4">
@@ -582,6 +582,9 @@
 
 @push('styles')
 <style>
+@keyframes zp-spin { to { transform: rotate(360deg); } }
+.zp-spin { animation: zp-spin 0.65s linear infinite; }
+
 /* Radio card base */
 .group-option-card,
 .pkg-radio-label,
@@ -1059,13 +1062,68 @@
         return '<tr><td colspan="2" class="review-section-title pt-3">' + title + '</td></tr>';
     }
 
+    var _refIds = {}; // { i: { value, valid, discount_type, discount_value, coupon_name, message } }
+
+    window.applyRefId = async function (idx) {
+        var input = document.getElementById('ref_input_' + idx);
+        if (!input) return;
+        var v = input.value.trim().toUpperCase();
+
+        if (!v) {
+            _refIds[idx] = { value: '', valid: false };
+            buildReview();
+            return;
+        }
+
+        // Reject if same code already applied to another traveller
+        for (var otherIdx in _refIds) {
+            if (parseInt(otherIdx) !== idx && _refIds[otherIdx].valid && _refIds[otherIdx].value === v) {
+                _refIds[idx] = { value: v, valid: false, message: 'This coupon is already applied to another traveller.' };
+                buildReview();
+                return;
+            }
+        }
+
+        // Show loading
+        var btn = document.getElementById('ref_btn_' + idx);
+        if (btn) { btn.innerHTML = '<span class="zp-spin" style="display:inline-block;width:11px;height:11px;border:2px solid rgba(255,255,255,0.4);border-top-color:#fff;border-radius:50%;vertical-align:middle"></span>'; btn.disabled = true; }
+
+        try {
+            var res = await fetch('{{ route('coupon.validate') }}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                },
+                body: JSON.stringify({ code: v })
+            });
+            var data = await res.json();
+
+            if (data.valid) {
+                _refIds[idx] = {
+                    value: v,
+                    valid: true,
+                    discount_type:  data.discount_type,
+                    discount_value: data.discount_value,
+                    coupon_name:    data.coupon_name
+                };
+            } else {
+                _refIds[idx] = { value: v, valid: false, message: data.message || 'Invalid or already used.' };
+            }
+        } catch (e) {
+            _refIds[idx] = { value: v, valid: false, message: 'Connection error. Try again.' };
+        }
+
+        if (btn) { btn.textContent = 'Apply'; btn.disabled = false; btn.style.opacity = ''; }
+        buildReview();
+    };
+
     function buildCostSummary(pkg, city, memberRows) {
         var pricingKey = (pkg === 'ground_only') ? 'ground_only' : city;
         var prices = pricingConfig[pricingKey] || pricingConfig['karachi'];
 
         var travelers = [];
 
-        // Lead traveller
         var leadName = document.querySelector('[name="persons[0][full_name]"]');
         var leadType = document.querySelector('[name="persons[0][passenger_type]"]');
         travelers.push({
@@ -1073,7 +1131,6 @@
             type: (leadType && leadType.value) ? leadType.value : 'adult',
         });
 
-        // Family members
         memberRows.forEach(function (rowEl, i) {
             var idx = i + 1;
             var nameEl = rowEl.querySelector('[name="persons[' + idx + '][full_name]"]');
@@ -1087,16 +1144,59 @@
         var grandTotal = 0;
         var rows = '';
         travelers.forEach(function (t, i) {
+            var ref = _refIds[i] || { value: '', valid: false };
             var price = prices[t.type] || 0;
-            grandTotal += price;
+            var discounted = price;
+            if (ref.valid) {
+                if (ref.discount_type === 'percentage') {
+                    discounted = Math.round(price * (1 - ref.discount_value / 100));
+                } else {
+                    discounted = Math.max(0, price - ref.discount_value);
+                }
+            }
+            grandTotal += discounted;
             var typeLabel = passengerTypeLabels[t.type] || t.type;
             var pos = i === 0 ? 'Lead' : 'Traveller ' + (i + 1);
+
+            var priceCell = ref.valid
+                ? '<span style="text-decoration:line-through;color:#aaa;font-size:0.78rem">$' + price.toLocaleString() + '</span>'
+                  + ' <span style="color:#16a34a;font-weight:600">$' + discounted.toLocaleString() + '</span>'
+                : '$' + price.toLocaleString();
+
+            // Main data row
             rows += '<tr>';
             rows += '<td style="font-size:0.82rem;padding:0.35rem 0.5rem">' + pos + '</td>';
             rows += '<td style="font-size:0.82rem;padding:0.35rem 0.5rem" class="text-muted">' + t.name + '</td>';
             rows += '<td style="font-size:0.82rem;padding:0.35rem 0.5rem" class="text-muted">' + typeLabel + '</td>';
-            rows += '<td style="font-size:0.82rem;padding:0.35rem 0.5rem;text-align:right" class="fw-500">$' + price.toLocaleString() + '</td>';
+            rows += '<td style="font-size:0.82rem;padding:0.35rem 0.5rem;text-align:right" class="fw-500">' + priceCell + '</td>';
             rows += '</tr>';
+
+            // Coupon sub-row
+            var feedbackHtml = '';
+            if (ref.value) {
+                if (ref.valid) {
+                    var discLabel = ref.discount_type === 'percentage'
+                        ? ref.discount_value + '% off'
+                        : '$' + parseFloat(ref.discount_value).toFixed(0) + ' off';
+                    feedbackHtml = '<span style="color:#16a34a;font-size:0.77rem;white-space:nowrap">✓ ' + (ref.coupon_name || 'Coupon') + ' — ' + discLabel + '</span>';
+                } else {
+                    feedbackHtml = '<span style="color:#dc2626;font-size:0.77rem;white-space:nowrap">✗ ' + (ref.message || 'Invalid or already used.') + '</span>';
+                }
+            }
+            rows += '<tr style="background:rgba(0,0,0,0.018)">';
+            rows += '<td colspan="4" style="padding:0.25rem 0.5rem 0.55rem 0.5rem;border-bottom:1px solid rgba(0,0,0,0.05)">';
+            rows += '<div style="display:flex;align-items:center;gap:0.4rem;flex-wrap:wrap">';
+            rows += '<input id="ref_input_' + i + '" type="text" placeholder="Coupon Code — optional discount"';
+            rows += ' value="' + (ref.value || '') + '"';
+            rows += ' style="font-family:monospace;font-size:0.78rem;text-transform:uppercase;width:230px;padding:0.2rem 0.5rem;border:1px solid #ddd;border-radius:0.3rem;outline:none"';
+            rows += ' oninput="this.value=this.value.toUpperCase()"';
+            rows += ' onkeydown="if(event.key===\'Enter\'){event.preventDefault();applyRefId(' + i + ')}">';
+            rows += '<button type="button" id="ref_btn_' + i + '" onclick="applyRefId(' + i + ')"';
+            rows += ' style="font-size:0.78rem;padding:0.2rem 0.65rem;background:var(--zp-maroon);color:#fff;border:none;border-radius:0.3rem;cursor:pointer;white-space:nowrap">Apply</button>';
+            rows += '<span>' + feedbackHtml + '</span>';
+            rows += '<input type="hidden" name="persons[' + i + '][zp_ref_id]" id="ref_hidden_' + i + '" value="' + (ref.valid ? ref.value : '') + '">';
+            rows += '</div>';
+            rows += '</td></tr>';
         });
 
         var pkgLabel = (pkg === 'ground_only') ? 'Ground Only' : 'Full Package (' + (city.charAt(0).toUpperCase() + city.slice(1)) + ')';
@@ -1246,6 +1346,20 @@
     @if($errors->any())
     showStep(1);
     @endif
+
+    // Submit overlay
+    document.getElementById('reg-form').addEventListener('submit', function () {
+        document.getElementById('submit-overlay').style.display = 'flex';
+    });
 }());
 </script>
+
+{{-- Submit overlay --}}
+<div id="submit-overlay"
+     style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(255,255,255,0.93);flex-direction:column;align-items:center;justify-content:center;gap:1rem;">
+    <div style="width:48px;height:48px;border:4px solid rgba(92,15,30,0.15);border-top-color:var(--zp-maroon);border-radius:50%;animation:zp-spin 0.7s linear infinite;"></div>
+    <p style="font-weight:700;font-size:1rem;color:var(--zp-maroon);margin:0;">Submitting your registration…</p>
+    <p style="font-size:0.82rem;color:#888;margin:0;">Please do not close or refresh this page.</p>
+</div>
+
 @endpush

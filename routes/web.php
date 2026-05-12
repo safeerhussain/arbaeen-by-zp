@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\CouponProxyController;
 use App\Http\Controllers\FeedController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\StatusController;
@@ -17,6 +18,9 @@ Route::get('/payment-info', [PageController::class, 'paymentInfo'])->name('payme
 Route::get('/terms', [PageController::class, 'terms'])->name('terms');
 Route::get('/contact', [PageController::class, 'contact'])->name('contact');
 Route::get('/questions', [PageController::class, 'questions'])->name('questions');
+
+// Coupon proxy
+Route::post('/coupon/validate', [CouponProxyController::class, 'validate'])->name('coupon.validate');
 
 // Registration (Module 4)
 Route::get('/register', [BookingController::class, 'create'])->name('register');
