@@ -62,19 +62,19 @@ return [
     'pricing' => [
         'karachi' => [
             'adult' => 1440,
-            'child_with_bed' => 1090,
+            'child_with_bed' => 1390,
             'child_without_bed' => 1090,
             'infant' => 390,
         ],
         'lahore' => [
             'adult' => 1580,
-            'child_with_bed' => 1220,
+            'child_with_bed' => 1530,
             'child_without_bed' => 1220,
             'infant' => 450,
         ],
         'islamabad' => [
             'adult' => 1580,
-            'child_with_bed' => 1220,
+            'child_with_bed' => 1530,
             'child_without_bed' => 1220,
             'infant' => 450,
         ],

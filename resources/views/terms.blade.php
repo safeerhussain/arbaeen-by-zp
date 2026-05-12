@@ -175,10 +175,49 @@
                     </p>
                 </div>
 
+                {{-- Section: Pricing Conditions --}}
+                <div class="mb-5">
+                    <h2 class="fw-700 text-maroon mb-3" style="font-size: 1.15rem; letter-spacing: -0.01em">
+                        6. Pricing &amp; Payment Conditions
+                    </h2>
+                    <ul class="list-unstyled" style="font-size: 0.9rem; line-height: 1.9; color: var(--zp-ink-soft)">
+                        <li class="mb-2 d-flex gap-2">
+                            <span class="text-gold fw-700" style="font-size:0.65rem;margin-top:0.45rem;flex-shrink:0">✦</span>
+                            <span>In view of current regional conditions, package prices and travel dates are subject to change at any time.</span>
+                        </li>
+                        <li class="mb-2 d-flex gap-2">
+                            <span class="text-gold fw-700" style="font-size:0.65rem;margin-top:0.45rem;flex-shrink:0">✦</span>
+                            <span>Any additional costs arising from new regulations imposed by the Pakistani government or any other relevant authority will be charged separately.</span>
+                        </li>
+                        <li class="d-flex gap-2">
+                            <span class="text-gold fw-700" style="font-size:0.65rem;margin-top:0.45rem;flex-shrink:0">✦</span>
+                            <span>All amounts are charged in Pakistani Rupees (PKR) based on the applicable exchange rate on the date of payment.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                {{-- Section: Ticket & Visa Cost --}}
+                <div class="mb-5">
+                    <h2 class="fw-700 text-maroon mb-3" style="font-size: 1.15rem; letter-spacing: -0.01em">
+                        7. Ticket &amp; Visa Cost Adjustment
+                    </h2>
+                    <div class="p-4 rounded-3"
+                         style="background:rgba(232,101,31,0.08);border:1.5px solid rgba(232,101,31,0.4)">
+                        <div class="d-flex gap-3 align-items-start">
+                            <span class="fw-700 text-orange flex-shrink-0" style="font-size:1.1rem;line-height:1.3">⚠</span>
+                            <p class="mb-0" style="font-size:0.9rem;line-height:1.85;color:var(--zp-ink)">
+                                Ticket and visa costs are currently estimated at <strong>USD 800 per person</strong>.
+                                Any increase due to changes in airline fares or visa policies will be payable by the pilgrim.
+                                Any reduction in cost will be adjusted as a discount or refund to the pilgrim.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
                 {{-- Section: Governing Law --}}
                 <div class="mb-5">
                     <h2 class="fw-700 text-maroon mb-3" style="font-size: 1.15rem; letter-spacing: -0.01em">
-                        6. Governing Terms
+                        8. Governing Terms
                     </h2>
                     <p style="font-size: 0.9rem; line-height: 1.9; color: var(--zp-ink-soft)">
                         These terms are governed by the laws of Pakistan. Any dispute arising from this
