@@ -107,7 +107,14 @@
                         {{ str_replace('_', ' ', $booking->package_type) }}<br>
                         <span style="font-size:0.72rem;opacity:0.7;text-transform:capitalize">{{ $booking->departure_city }}</span>
                     </td>
-                    <td class="py-3 text-center fw-600">{{ $booking->persons_count }}</td>
+                    <td class="py-3 text-center fw-600">
+                        {{ $booking->persons_count }}
+                        @if($booking->discount_persons_count > 0)
+                        <span class="badge d-block mx-auto mt-1" style="background:rgba(10,105,82,0.12);color:#0a6952;font-size:0.62rem;font-weight:600;letter-spacing:0.03em;width:fit-content">
+                            Arbaeen Disc. ×{{ $booking->discount_persons_count }}
+                        </span>
+                        @endif
+                    </td>
                     <td class="py-3">
                         @php
                         $statusStyles = [

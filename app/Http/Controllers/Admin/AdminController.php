@@ -50,7 +50,7 @@ class AdminController extends Controller
     public function dashboard(Request $request): View
     {
         $query = Booking::with('lead')
-            ->withCount('persons')
+            ->withCount(['persons', 'persons as discount_persons_count' => fn ($q) => $q->whereNotNull('zp_ref_id')])
             ->latest();
 
         if ($request->filled('group')) {
