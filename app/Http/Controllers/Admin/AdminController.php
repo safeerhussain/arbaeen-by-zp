@@ -66,6 +66,7 @@ class AdminController extends Controller
         $stats = [
             'total' => Booking::count(),
             'total_travelers' => Person::count(),
+            'zp_discount_availed' => Person::whereNotNull('zp_ref_id')->count(),
             'confirmed' => Booking::where('status', 'confirmed')->count(),
             'pending' => Booking::where('status', 'pending')->count(),
             'cancelled' => Booking::where('status', 'cancelled')->count(),
