@@ -139,7 +139,7 @@
                                     "Assalamualaikum " . ($booking->lead?->full_name ?? 'there') . ",\n\n" .
                                     "This is regarding your Arbaeen 2026 booking (Ref: " . $booking->booking_id . ").\n\n" .
                                     "Please let us know if you have any questions. JazakAllah Khair.\n\n" .
-                                    "— Ziyarat Pakistan Team"
+                                    "— Ziyarat Planner Team"
                                 );
                             @endphp
                             @if($rawMobile)
