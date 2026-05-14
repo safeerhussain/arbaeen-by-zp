@@ -189,9 +189,10 @@ class AdminController extends Controller
                 $stagesPaid = $booking->paymentStages->pluck('stage')->sort()->implode(', ');
 
                 foreach ($booking->persons->sortBy('position') as $person) {
+                    $travelerSuffix = $person->position === 1 ? '' : '-'.chr(64 + $person->position - 1);
                     fputcsv($handle, [
                         // Identity
-                        $booking->booking_id,
+                        $booking->booking_id.$travelerSuffix,
                         $person->full_name,
                         $person->fathers_name ?? '',
                         // Booking status
